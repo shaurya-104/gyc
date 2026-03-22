@@ -87,7 +87,7 @@ function useInView(threshold = 0.15) {
   return { ref, inView };
 }
 
-function AnimatedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+function AnimatedSection({ children, className = "", style = {} }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const { ref, inView } = useInView();
   return (
     <div
@@ -97,6 +97,7 @@ function AnimatedSection({ children, className = "" }: { children: React.ReactNo
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(40px)",
         transition: "opacity 0.7s ease, transform 0.7s ease",
+        ...style,
       }}
     >
       {children}
