@@ -383,8 +383,8 @@ export default function Home() {
             Join hundreds of delegates from across India for two days of diplomacy, debate, and transformation at Panjab University.
           </p>
 
-          <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
-            Register via Google Form
+          <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
+            Register
           </a>
 
           <div className="contact-grid" style={{ display: "grid", gap: "1px", maxWidth: "680px", margin: "56px auto 0", border: "1px solid rgba(255,255,255,0.07)" }}>
