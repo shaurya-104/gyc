@@ -144,6 +144,10 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn);
     return () => window.removeEventListener("scroll", fn);
@@ -158,7 +162,7 @@ export default function Home() {
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
 
         ::selection { background: rgba(201, 168, 76, 0.3); }
 
@@ -549,6 +553,8 @@ export default function Home() {
               {COMMITTEES.map((com, i) => (
                 <button
                   key={i}
+                  type="button"
+                  tabIndex={-1}
                   className={`committee-tab ${activeCommittee === i ? "active" : ""}`}
                   onClick={() => setActiveCommittee(i)}
                 >
