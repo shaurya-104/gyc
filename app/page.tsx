@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
@@ -8,12 +9,11 @@ const COMMITTEES = [
   { abbr: "UNHRC", name: "UN Human Rights Council", description: "An international body of 47 member states committed to promoting and protecting human rights globally. It addresses violations, provides recommendations, and upholds equality, justice, and dignity.", agenda: "Safeguarding Data Privacy and Data Protection as a Fundamental Right", color: "#2EC4B6", icon: "⚖️" },
   { abbr: "AIPPM", name: "All India Political Parties Meet", description: "A forum where representatives from across India's political spectrum convene to build consensus on pressing national issues, foster cross-party dialogue, and promote unity on matters of public welfare.", agenda: "Religious Intolerance and Secularism", color: "#FF9F1C", icon: "🏛️" },
   { abbr: "Lok Sabha", name: "Lok Sabha Simulation", description: "Simulates India's parliamentary system, giving participants an immersive experience in debating national issues, drafting resolutions, and understanding the full arc of legislative processes.", agenda: "Review of 12 Years of NDA Government", color: "#7B2D8B", icon: "📜" },
-
   { abbr: "RYS", name: "Rashtriya Yuva Sansad", description: "A simulation of India's youth parliament, RYS empowers young voices to debate pressing national issues, draft policy recommendations, and engage in democratic processes — building the next generation of informed and responsible citizens.", agenda: "The Role of Youth in Viksit Bharat 2047", color: "#22C55E", icon: "🇮🇳" },
   { abbr: "Int'l Press", name: "International Press", description: "The media body of GYC — covering debates, reporting developments, and providing critical analysis. Participants take on roles as reporters, photographers, and editors in a live journalism simulation.", agenda: "Simulating Real-World Journalism Across All Committees", color: "#6C757D", icon: "📰" },
 ];
 
-const FEES: { label: string; price: string; note: string; highlight?: boolean }[] = [
+const FEES = [
   { label: "Standard Delegate", price: "₹2,499", note: "per delegate" },
   { label: "Early Bird", price: "₹1,999", note: "until 30 March 2026", highlight: true },
   { label: "Delegation (5+)", price: "₹1,799", note: "per delegation" },
@@ -22,14 +22,14 @@ const FEES: { label: string; price: string; note: string; highlight?: boolean }[
 ];
 
 const COLLABORATORS = [
-  { name: "Panjab University", short: "PU", logo: "/panjab-university.png" },
-  { name: "Commonwealth Youth Council", short: "CYC", logo: "/cyc.png" },
-  { name: "G20 India", short: "G20", logo: "/g20.png" },
-  { name: "Y20 India", short: "Y20", logo: "/y20.png" },
-  { name: "Global Shapers Community", short: "GSC", logo: "/global-shapers.png" },
-  { name: "Saviṣkār", short: "SVK", logo: "/savishkar.png" },
-  { name: "AAYA", short: "AAYA", logo: "/aaya.png" },
-  { name: "Young Sapiens", short: "YS", logo: "/young-sapiens.png" },
+  { name: "Panjab University", short: "PU", logo: "/logos/panjab-university.png" },
+  { name: "Commonwealth Youth Council", short: "CYC", logo: "/logos/cyc.png" },
+  { name: "G20 India", short: "G20", logo: "/logos/g20.png" },
+  { name: "Y20 India", short: "Y20", logo: "/logos/y20.png" },
+  { name: "Global Shapers Community", short: "GSC", logo: "/logos/global-shapers.png" },
+  { name: "Saviṣkār", short: "SVK", logo: "/logos/savishkar.png" },
+  { name: "AAYA", short: "AAYA", logo: "/logos/aaya.png" },
+  { name: "Young Sapiens", short: "YS", logo: "/logos/young-sapiens.png" },
 ];
 
 function useInView(threshold = 0.1) {
@@ -46,6 +46,42 @@ function useInView(threshold = 0.1) {
   return { ref, inView };
 }
 
+function CountdownTimer() {
+  const target = new Date("2026-04-24T09:00:00+05:30").getTime();
+  const [diff, setDiff] = useState(0); 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setDiff(target - Date.now());
+    const id = setInterval(() => setDiff(target - Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [target]);
+
+  if (!mounted) {
+    return <div style={{ height: "60px" }}></div>;
+  }
+
+  const d = Math.max(0, Math.floor(diff / 86400000));
+  const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
+  const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
+  const s = Math.max(0, Math.floor((diff % 60000) / 1000));
+  const units = [{ v: d, l: "Days" }, { v: h, l: "Hours" }, { v: m, l: "Min" }, { v: s, l: "Sec" }];
+  
+  return (
+    <div style={{ display: "flex", gap: "clamp(12px, 3vw, 24px)", justifyContent: "center" }}>
+      {units.map(({ v, l }) => (
+        <div key={l} style={{ textAlign: "center", minWidth: "clamp(52px, 12vw, 70px)" }}>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 6vw, 3.5rem)", fontWeight: 700, color: "#C9A84C", lineHeight: 1 }}>
+            {String(v).padStart(2, "0")}
+          </div>
+          <div style={{ fontSize: "clamp(0.55rem, 1.5vw, 0.65rem)", letterSpacing: "0.15em", color: "#9CA3AF", marginTop: "4px", textTransform: "uppercase" }}>{l}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function AnimatedSection({ children, className = "", style = {} }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const { ref, inView } = useInView();
   return (
@@ -60,32 +96,6 @@ function AnimatedSection({ children, className = "", style = {} }: { children: R
       }}
     >
       {children}
-    </div>
-  );
-}
-
-function CountdownTimer() {
-  const target = new Date("2026-04-24T09:00:00+05:30").getTime();
-  const [diff, setDiff] = useState(target - Date.now());
-  useEffect(() => {
-    const id = setInterval(() => setDiff(target - Date.now()), 1000);
-    return () => clearInterval(id);
-  }, [target]);
-  const d = Math.max(0, Math.floor(diff / 86400000));
-  const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
-  const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
-  const s = Math.max(0, Math.floor((diff % 60000) / 1000));
-  const units = [{ v: d, l: "Days" }, { v: h, l: "Hours" }, { v: m, l: "Min" }, { v: s, l: "Sec" }];
-  return (
-    <div style={{ display: "flex", gap: "clamp(12px, 3vw, 24px)", justifyContent: "center" }}>
-      {units.map(({ v, l }) => (
-        <div key={l} style={{ textAlign: "center", minWidth: "clamp(52px, 12vw, 70px)" }}>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 6vw, 3.5rem)", fontWeight: 700, color: "#C9A84C", lineHeight: 1 }}>
-            {String(v).padStart(2, "0")}
-          </div>
-          <div style={{ fontSize: "clamp(0.55rem, 1.5vw, 0.65rem)", letterSpacing: "0.15em", color: "#9CA3AF", marginTop: "4px", textTransform: "uppercase" }}>{l}</div>
-        </div>
-      ))}
     </div>
   );
 }
@@ -181,7 +191,7 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src="/gyc-logo.png" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
+          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>
             GYC <span style={{ color: "#C9A84C" }}>2.0</span>
           </span>
@@ -280,10 +290,10 @@ export default function Home() {
                     width={52}
                     height={52}
                     style={{ width: "100%", height: "100%", objectFit: "contain", filter: "brightness(1.05)" }}
-                    onError={(e) => {
+                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                       const target = e.currentTarget;
                       target.style.display = "none";
-                      const fallback = target.nextElementSibling as HTMLElement;
+                      const fallback = target.nextElementSibling as HTMLElement | null;
                       if (fallback) fallback.style.display = "flex";
                     }}
                   />
@@ -297,7 +307,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
 
       {/* SPEAKERS */}
       <section style={{ padding: "80px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
@@ -538,7 +547,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src="/gyc-logo.png" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
