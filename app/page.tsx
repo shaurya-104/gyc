@@ -120,7 +120,10 @@ export default function Home() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: auto; }
+        
+        /* FIX: Smooth scroll & offset so navbar doesn't cover content */
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+        
         ::selection { background: rgba(201,168,76,0.3); }
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #080C14; }
@@ -191,7 +194,8 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
+          {/* FIX: Reverted to your exact .jpeg working file extension */}
+          <img src="/gyc-logo.jpeg" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>
             GYC <span style={{ color: "#C9A84C" }}>2.0</span>
           </span>
@@ -547,7 +551,8 @@ export default function Home() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+          {/* FIX: Reverted back to the working .jpeg path */}
+          <img src="/gyc-logo.jpeg" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
