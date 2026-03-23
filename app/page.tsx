@@ -193,8 +193,22 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {/* THE EXACT FILE PATH FROM YOUR REPOSITORY */}
-          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
+          {/* Main Logo with Fallback */}
+          <img 
+            src="/gyc-logo.png.jpeg" 
+            alt="GYC" 
+            style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.style.display = "none";
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = "flex";
+            }} 
+          />
+          {/* Fallback Text Box (Hidden by default, shown if image breaks) */}
+          <span style={{ display: "none", width: "36px", height: "36px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "6px", fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.05em" }}>
+            GYC
+          </span>
+
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>
             GYC <span style={{ color: "#C9A84C" }}>2.0</span>
           </span>
@@ -550,7 +564,23 @@ export default function Home() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <img src="/gyc-logo.png.jpeg" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
+          
+          {/* Main Logo with Fallback */}
+          <img 
+            src="/gyc-logo.png.jpeg" 
+            alt="GYC" 
+            style={{ width: "28px", height: "28px", objectFit: "contain" }} 
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.style.display = "none";
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = "flex";
+            }} 
+          />
+          {/* Fallback Text Box (Hidden by default, shown if image breaks) */}
+          <span style={{ display: "none", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
+            GYC
+          </span>
+
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
