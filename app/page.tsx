@@ -22,14 +22,14 @@ const FEES: { label: string; price: string; note: string; highlight?: boolean }[
 ];
 
 const COLLABORATORS = [
-  { name: "Panjab University", short: "PU", logo: "/logos/panjab-university.png" },
-  { name: "Commonwealth Youth Council", short: "CYC", logo: "/logos/cyc.png" },
-  { name: "G20 India", short: "G20", logo: "/logos/g20.png" },
-  { name: "Y20 India", short: "Y20", logo: "/logos/y20.png" },
-  { name: "Global Shapers Community", short: "GSC", logo: "/logos/global-shapers.png" },
-  { name: "Saviṣkār", short: "SVK", logo: "/logos/savishkar.png" },
-  { name: "AAYA", short: "AAYA", logo: "/logos/aaya.png" },
-  { name: "Young Sapiens", short: "YS", logo: "/logos/young-sapiens.png" },
+  { name: "Panjab University", short: "PU", logo: "/panjab-university.png" },
+  { name: "Commonwealth Youth Council", short: "CYC", logo: "/cyc.png" },
+  { name: "G20 India", short: "G20", logo: "/g20.png" },
+  { name: "Y20 India", short: "Y20", logo: "/y20.png" },
+  { name: "Global Shapers Community", short: "GSC", logo: "/global-shapers.png" },
+  { name: "Saviṣkār", short: "SVK", logo: "/savishkar.png" },
+  { name: "AAYA", short: "AAYA", logo: "/aaya.png" },
+  { name: "Young Sapiens", short: "YS", logo: "/young-sapiens.png" },
 ];
 
 function useInView(threshold = 0.1) {
@@ -181,7 +181,7 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ width: "32px", height: "32px", background: "linear-gradient(135deg, #C9A84C, #E8CC7A)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 900, color: "#080C14", fontFamily: "'Playfair Display', serif", flexShrink: 0 }}>G</div>
+          <img src="/gyc-logo.png" alt="GYC" style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} />
           <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>
             GYC <span style={{ color: "#C9A84C" }}>2.0</span>
           </span>
@@ -538,7 +538,7 @@ export default function Home() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <div style={{ width: "24px", height: "24px", background: "linear-gradient(135deg, #C9A84C, #E8CC7A)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "11px", fontWeight: 900, color: "#080C14", fontFamily: "'Playfair Display', serif" }}>G</div>
+          <img src="/gyc-logo.png" alt="GYC" style={{ width: "28px", height: "28px", objectFit: "contain" }} />
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
