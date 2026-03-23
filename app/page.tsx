@@ -8,23 +8,38 @@ const COMMITTEES = [
   { abbr: "UNHRC", name: "UN Human Rights Council", description: "An international body of 47 member states committed to promoting and protecting human rights globally. It addresses violations, provides recommendations, and upholds equality, justice, and dignity.", agenda: "Safeguarding Data Privacy and Data Protection as a Fundamental Right", color: "#2EC4B6", icon: "⚖️" },
   { abbr: "AIPPM", name: "All India Political Parties Meet", description: "A forum where representatives from across India's political spectrum convene to build consensus on pressing national issues, foster cross-party dialogue, and promote unity on matters of public welfare.", agenda: "Religious Intolerance and Secularism", color: "#FF9F1C", icon: "🏛️" },
   { abbr: "Lok Sabha", name: "Lok Sabha Simulation", description: "Simulates India's parliamentary system, giving participants an immersive experience in debating national issues, drafting resolutions, and understanding the full arc of legislative processes.", agenda: "Review of 12 Years of NDA Government", color: "#7B2D8B", icon: "📜" },
-  { abbr: "IPL Auction", name: "Indian Premier League Auction", description: "A high-intensity strategy simulation recreating the IPL player auction. Delegates compete as team owners and analysts, blending sports management, economics, and real-time crisis negotiation.", agenda: "Build the Strongest Squad Within a Fixed Budget", color: "#F4A261", icon: "🏏" },
+
+  { abbr: "RYS", name: "Rashtriya Yuva Sansad", description: "A simulation of India's youth parliament, RYS empowers young voices to debate pressing national issues, draft policy recommendations, and engage in democratic processes — building the next generation of informed and responsible citizens.", agenda: "The Role of Youth in Viksit Bharat 2047", color: "#22C55E", icon: "🇮🇳" },
   { abbr: "Int'l Press", name: "International Press", description: "The media body of GYC — covering debates, reporting developments, and providing critical analysis. Participants take on roles as reporters, photographers, and editors in a live journalism simulation.", agenda: "Simulating Real-World Journalism Across All Committees", color: "#6C757D", icon: "📰" },
 ];
 
-const FEES = [
+const FEES: { label: string; price: string; note: string; highlight?: boolean }[] = [
   { label: "Standard Delegate", price: "₹2,499", note: "per delegate" },
-  { label: "Early Bird", price: "₹1,999", note: "until 10 Feb 2026" },
+  { label: "Early Bird", price: "₹1,999", note: "until 30 March 2026", highlight: true },
   { label: "Delegation (5+)", price: "₹1,799", note: "per delegation" },
   { label: "International Press", price: "₹1,599", note: "per delegation" },
   { label: "Rashtriya Yuva Sansad", price: "₹999", note: "per delegation" },
+];
+
+const COLLABORATORS = [
+  { name: "Panjab University", short: "PU", logo: "/logos/panjab-university.png" },
+  { name: "Commonwealth Youth Council", short: "CYC", logo: "/logos/cyc.png" },
+  { name: "G20 India", short: "G20", logo: "/logos/g20.png" },
+  { name: "Y20 India", short: "Y20", logo: "/logos/y20.png" },
+  { name: "Global Shapers Community", short: "GSC", logo: "/logos/global-shapers.png" },
+  { name: "Saviṣkār", short: "SVK", logo: "/logos/savishkar.png" },
+  { name: "AAYA", short: "AAYA", logo: "/logos/aaya.png" },
+  { name: "Young Sapiens", short: "YS", logo: "/logos/young-sapiens.png" },
 ];
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold });
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) setInView(true); },
+      { threshold }
+    );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, [threshold]);
@@ -34,7 +49,16 @@ function useInView(threshold = 0.1) {
 function AnimatedSection({ children, className = "", style = {} }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
   const { ref, inView } = useInView();
   return (
-    <div ref={ref} className={className} style={{ opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(30px)", transition: "opacity 0.6s ease, transform 0.6s ease", ...style }}>
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(30px)",
+        transition: "opacity 0.6s ease, transform 0.6s ease",
+        ...style,
+      }}
+    >
       {children}
     </div>
   );
@@ -43,14 +67,18 @@ function AnimatedSection({ children, className = "", style = {} }: { children: R
 function CountdownTimer() {
   const target = new Date("2026-04-24T09:00:00+05:30").getTime();
   const [diff, setDiff] = useState(target - Date.now());
-  useEffect(() => { const id = setInterval(() => setDiff(target - Date.now()), 1000); return () => clearInterval(id); }, [target]);
+  useEffect(() => {
+    const id = setInterval(() => setDiff(target - Date.now()), 1000);
+    return () => clearInterval(id);
+  }, [target]);
   const d = Math.max(0, Math.floor(diff / 86400000));
   const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
   const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
   const s = Math.max(0, Math.floor((diff % 60000) / 1000));
+  const units = [{ v: d, l: "Days" }, { v: h, l: "Hours" }, { v: m, l: "Min" }, { v: s, l: "Sec" }];
   return (
     <div style={{ display: "flex", gap: "clamp(12px, 3vw, 24px)", justifyContent: "center" }}>
-      {[{ v: d, l: "Days" }, { v: h, l: "Hours" }, { v: m, l: "Min" }, { v: s, l: "Sec" }].map(({ v, l }) => (
+      {units.map(({ v, l }) => (
         <div key={l} style={{ textAlign: "center", minWidth: "clamp(52px, 12vw, 70px)" }}>
           <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 6vw, 3.5rem)", fontWeight: 700, color: "#C9A84C", lineHeight: 1 }}>
             {String(v).padStart(2, "0")}
@@ -68,6 +96,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => { window.scrollTo(0, 0); }, []);
+
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn);
@@ -92,6 +121,7 @@ export default function Home() {
 
         .gold-btn { background: linear-gradient(135deg, #C9A84C, #E8CC7A, #C9A84C); background-size: 200%; color: #080C14; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 36px; border: none; cursor: pointer; transition: background-position 0.4s, transform 0.2s, box-shadow 0.2s; text-decoration: none; display: inline-block; }
         .gold-btn:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.35); }
+
         .ghost-btn { background: transparent; color: #C9A84C; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 1px solid rgba(201,168,76,0.5); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
         .ghost-btn:hover { border-color: #C9A84C; background: rgba(201,168,76,0.08); }
 
@@ -104,6 +134,9 @@ export default function Home() {
 
         .fee-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; transition: all 0.25s; }
         .fee-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(201,168,76,0.25); }
+
+        .collab-badge { display: flex; align-items: center; gap: 8px; padding: 8px 16px; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.03); border-radius: 4px; transition: all 0.2s; cursor: default; }
+        .collab-badge:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
 
         .divider-line { width: 60px; height: 2px; background: linear-gradient(90deg, #C9A84C, transparent); margin: 16px 0 24px; }
 
@@ -128,8 +161,6 @@ export default function Home() {
           .hero-btns { flex-direction: column; align-items: center; }
           .hero-btns a { width: 100%; text-align: center; }
           .countdown-box { padding: 20px 16px !important; }
-          .section-pad { padding: 64px 20px !important; }
-          .fee-card { padding: 16px 18px; }
         }
         @media (min-width: 769px) {
           .show-mobile { display: none !important; }
@@ -140,32 +171,46 @@ export default function Home() {
       `}</style>
 
       {/* NAVBAR */}
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, padding: "0 clamp(16px, 4vw, 40px)", height: "70px", display: "flex", alignItems: "center", justifyContent: "space-between", background: scrolled || menuOpen ? "rgba(8,12,20,0.97)" : "transparent", borderBottom: scrolled ? "1px solid rgba(201,168,76,0.1)" : "1px solid transparent", backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none", transition: "all 0.3s ease" }}>
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
+        padding: "0 clamp(16px, 4vw, 40px)", height: "70px",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        background: scrolled || menuOpen ? "rgba(8,12,20,0.97)" : "transparent",
+        borderBottom: scrolled ? "1px solid rgba(201,168,76,0.1)" : "1px solid transparent",
+        backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
+        transition: "all 0.3s ease",
+      }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <div style={{ width: "32px", height: "32px", background: "linear-gradient(135deg, #C9A84C, #E8CC7A)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "14px", fontWeight: 900, color: "#080C14", fontFamily: "'Playfair Display', serif", flexShrink: 0 }}>G</div>
-          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>GYC <span style={{ color: "#C9A84C" }}>2.0</span></span>
+          <span style={{ fontFamily: "'Playfair Display', serif", fontSize: "1rem", letterSpacing: "0.05em", color: "#E8E6E1" }}>
+            GYC <span style={{ color: "#C9A84C" }}>2.0</span>
+          </span>
         </div>
 
-        {/* Desktop nav */}
         <div className="hide-mobile" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {["about", "committees", "fees", "contact"].map(s => <a key={s} href={`#${s}`} className="nav-link">{s}</a>)}
+          {["about", "committees", "fees", "contact"].map(s => (
+            <a key={s} href={`#${s}`} className="nav-link">{s}</a>
+          ))}
           <a href="#contact" className="gold-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           type="button"
           className="show-mobile"
           onClick={() => setMenuOpen(!menuOpen)}
           style={{ background: "transparent", border: "none", cursor: "pointer", flexDirection: "column", gap: "5px", padding: "8px" }}
         >
-          {[0,1,2].map(i => (
-            <div key={i} style={{ width: "22px", height: "2px", background: "#C9A84C", transition: "all 0.3s", transform: menuOpen ? (i === 0 ? "rotate(45deg) translateY(7px)" : i === 2 ? "rotate(-45deg) translateY(-7px)" : "scaleX(0)") : "none" }} />
+          {[0, 1, 2].map(i => (
+            <div key={i} style={{
+              width: "22px", height: "2px", background: "#C9A84C", transition: "all 0.3s",
+              transform: menuOpen
+                ? (i === 0 ? "rotate(45deg) translateY(7px)" : i === 2 ? "rotate(-45deg) translateY(-7px)" : "scaleX(0)")
+                : "none",
+            }} />
           ))}
         </button>
       </nav>
 
-      {/* Mobile Menu */}
       {menuOpen && (
         <div className="mobile-menu">
           {["about", "committees", "fees", "contact"].map(s => (
@@ -182,7 +227,12 @@ export default function Home() {
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 40% at 50% 100%, rgba(74,144,217,0.08) 0%, transparent 60%)" }} />
 
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="particle" style={{ width: `${2 + (i % 3)}px`, height: `${2 + (i % 3)}px`, background: i % 3 === 0 ? "#C9A84C" : "rgba(201,168,76,0.3)", left: `${10 + i * 11}%`, bottom: `${5 + (i * 13) % 40}%`, animationDuration: `${8 + i * 2.5}s`, animationDelay: `${i * 0.8}s` }} />
+          <div key={i} className="particle" style={{
+            width: `${2 + (i % 3)}px`, height: `${2 + (i % 3)}px`,
+            background: i % 3 === 0 ? "#C9A84C" : "rgba(201,168,76,0.3)",
+            left: `${10 + i * 11}%`, bottom: `${5 + (i * 13) % 40}%`,
+            animationDuration: `${8 + i * 2.5}s`, animationDelay: `${i * 0.8}s`,
+          }} />
         ))}
 
         <div style={{ position: "relative", zIndex: 2, maxWidth: "900px", width: "100%" }}>
@@ -190,7 +240,9 @@ export default function Home() {
 
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.4rem, 9vw, 7rem)", fontWeight: 900, lineHeight: 1.0, letterSpacing: "clamp(-1px, -0.02em, -2px)", marginBottom: "24px", color: "#FFFFFF" }}>
             Global Youth<br />
-            <span style={{ background: "linear-gradient(135deg, #C9A84C 20%, #F0DC8C 50%, #C9A84C 80%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontStyle: "italic" }}>Conclave 2.0</span>
+            <span style={{ background: "linear-gradient(135deg, #C9A84C 20%, #F0DC8C 50%, #C9A84C 80%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", fontStyle: "italic" }}>
+              Conclave 2.0
+            </span>
           </h1>
 
           <p style={{ color: "#9CA3AF", fontSize: "clamp(0.9rem, 2.5vw, 1.15rem)", lineHeight: 1.7, maxWidth: "540px", margin: "0 auto 40px", fontWeight: 300 }}>
@@ -209,60 +261,83 @@ export default function Home() {
         </div>
       </header>
 
-
       {/* COLLABORATORS */}
-      <section style={{ padding: "32px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
+      <section style={{ padding: "28px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "24px" }}>
+          <div style={{ textAlign: "center", marginBottom: "20px" }}>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", color: "#6B7280", textTransform: "uppercase" }}>In Association With</span>
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center", alignItems: "center" }}>
-            {[
-              { name: "World Economic Forum", short: "WEF" },
-              { name: "Y20 India", short: "Y20" },
-              { name: "Saviṣkār", short: "SVK" },
-              { name: "Commonwealth Youth Council", short: "CYC" },
-              { name: "G20 India", short: "G20" },
-              { name: "Global Shapers Community", short: "GSC" },
-              { name: "AAYA", short: "AAYA" },
-              { name: "Young Sapiens", short: "YS" },
-            ].map(({ name, short }) => (
-              <div key={name} title={name} style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "8px 16px",
-                border: "1px solid rgba(255,255,255,0.08)",
-                background: "rgba(255,255,255,0.03)",
-                borderRadius: "4px",
-                transition: "all 0.2s",
-                cursor: "default",
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(201,168,76,0.3)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(201,168,76,0.05)"; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.08)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.03)"; }}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px", justifyContent: "center", alignItems: "center" }}>
+            {COLLABORATORS.map(({ name, short, logo }) => (
+              <div key={name} title={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "8px", padding: "12px 16px", border: "1px solid rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)", borderRadius: "8px", transition: "all 0.2s", cursor: "default", minWidth: "80px" }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(201,168,76,0.35)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-3px)"; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.03)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
               >
-                <div style={{
-                  width: "28px", height: "28px",
-                  background: "linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05))",
-                  border: "1px solid rgba(201,168,76,0.25)",
-                  borderRadius: "50%",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.5rem",
-                  fontWeight: 700,
-                  color: "#C9A84C",
-                  letterSpacing: "0.05em",
-                  flexShrink: 0,
-                }}>{short}</div>
-                <span style={{ fontSize: "clamp(0.7rem, 1.8vw, 0.8rem)", color: "#9CA3AF", fontWeight: 400, whiteSpace: "nowrap" }}>{name}</span>
+                <div style={{ width: "52px", height: "52px", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <img
+                    src={logo}
+                    alt={name}
+                    width={52}
+                    height={52}
+                    style={{ width: "100%", height: "100%", objectFit: "contain", filter: "brightness(1.05)" }}
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      target.style.display = "none";
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = "flex";
+                    }}
+                  />
+                  <span style={{ display: "none", width: "52px", height: "52px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.1)", borderRadius: "50%", fontFamily: "'DM Mono', monospace", fontSize: "0.55rem", fontWeight: 700, color: "#C9A84C" }}>
+                    {short}
+                  </span>
+                </div>
+                <span style={{ fontSize: "0.65rem", color: "#9CA3AF", fontWeight: 400, textAlign: "center", lineHeight: 1.3, maxWidth: "80px" }}>{name}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ABOUT */
-      <section id="about" className="section-pad" style={{ padding: "80px clamp(20px, 5vw, 48px)", maxWidth: "1100px", margin: "0 auto" }}>
+
+      {/* SPEAKERS */}
+      <section style={{ padding: "80px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <AnimatedSection>
+            <div style={{ textAlign: "center", marginBottom: "48px" }}>
+              <div className="tag" style={{ display: "inline-block" }}>GYC 1.0 Guests</div>
+              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 5vw, 3rem)", fontWeight: 700, color: "#FFFFFF" }}>
+                Voices That <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Inspired</span>
+              </h2>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(clamp(140px, 28vw, 200px), 1fr))", gap: "20px" }}>
+              {[
+                { name: "Prof. Rakesh Sinha", role: "Former MP", org: "Rajya Sabha", initials: "RS", color: "#4A90D9" },
+                { name: "Sharad Vivek Sagar", role: "CEO & Founder", org: "Dexterity Global", initials: "SVS", color: "#C9A84C" },
+                { name: "Shagun Parihar", role: "MLA", org: "Jammu & Kashmir", initials: "SP", color: "#2EC4B6" },
+                { name: "Rashmi Samant", role: "Former President", org: "Oxford University Students Union", initials: "RS", color: "#E63946" },
+                { name: "Gaurav Attri", role: "North Zone Organizing Secretary", org: "ABVP", initials: "GA", color: "#FF9F1C" },
+                { name: "Aditya Takiar", role: "National Secretary", org: "ABVP", initials: "AT", color: "#7B2D8B" },
+              ].map(({ name, role, org, initials, color }) => (
+                <div key={name} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", padding: "24px 20px", textAlign: "center", transition: "all 0.25s", cursor: "default" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `${color}40`; (e.currentTarget as HTMLDivElement).style.background = `${color}08`; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.02)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
+                >
+                  <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: `linear-gradient(135deg, ${color}40, ${color}15)`, border: `2px solid ${color}60`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontFamily: "'Playfair Display', serif", fontSize: "1rem", fontWeight: 700, color: color, letterSpacing: "0.05em" }}>
+                    {initials}
+                  </div>
+                  <div style={{ fontWeight: 600, color: "#E8E6E1", fontSize: "0.88rem", marginBottom: "4px", lineHeight: 1.3 }}>{name}</div>
+                  <div style={{ color: color, fontSize: "0.72rem", fontWeight: 500, marginBottom: "4px", letterSpacing: "0.03em" }}>{role}</div>
+                  <div style={{ color: "#6B7280", fontSize: "0.7rem", fontWeight: 300, lineHeight: 1.4 }}>{org}</div>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" style={{ padding: "80px clamp(20px, 5vw, 48px)", maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <div className="about-grid" style={{ display: "grid", gap: "48px", alignItems: "start" }}>
             <div>
@@ -312,16 +387,15 @@ export default function Home() {
 
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 clamp(20px, 5vw, 48px)" }}>
 
-          {/* Mobile: horizontal chips + card */}
+          {/* Mobile chips */}
           <div className="show-mobile" style={{ flexDirection: "column", gap: "16px" }}>
-            <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "8px", WebkitOverflowScrolling: "touch" } as React.CSSProperties}>
+            <div style={{ display: "flex", gap: "8px", overflowX: "auto", paddingBottom: "8px" }}>
               {COMMITTEES.map((com, i) => (
                 <button key={i} type="button" tabIndex={-1} className={`committee-chip ${activeCommittee === i ? "active" : ""}`} onClick={() => setActiveCommittee(i)}>
                   <span>{com.icon}</span>{com.abbr}
                 </button>
               ))}
             </div>
-
             <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", padding: "24px 20px", position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", top: "-60px", right: "-60px", width: "200px", height: "200px", borderRadius: "50%", background: `radial-gradient(circle, ${c.color}15, transparent 70%)`, pointerEvents: "none" }} />
               <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", color: c.color, textTransform: "uppercase", marginBottom: "10px" }}>{c.abbr}</div>
@@ -334,8 +408,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Desktop: sidebar + panel */}
-          <div className="hide-mobile" style={{ display: "flex", gap: "0" }}>
+          {/* Desktop sidebar */}
+          <div className="hide-mobile" style={{ display: "flex" }}>
             <div style={{ width: "240px", flexShrink: 0, borderRight: "1px solid rgba(255,255,255,0.07)" }}>
               {COMMITTEES.map((com, i) => (
                 <button key={i} type="button" tabIndex={-1} className={`committee-tab ${activeCommittee === i ? "active" : ""}`} onClick={() => setActiveCommittee(i)}>
@@ -368,23 +442,26 @@ export default function Home() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <AnimatedSection>
             <div className="fees-grid" style={{ display: "grid", gap: "48px", alignItems: "flex-start" }}>
-
               <div>
                 <div className="tag">Registration</div>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 700, color: "#FFFFFF", marginBottom: "8px" }}>
                   Fees & <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Inclusions</span>
                 </h2>
                 <div className="divider-line" />
-                <p style={{ color: "#6B7280", fontSize: "0.8rem", marginBottom: "28px", fontWeight: 300 }}>All fees include conference materials & meals. Accommodation is extra. A delegation = group of 5.</p>
-
+                <p style={{ color: "#6B7280", fontSize: "0.8rem", marginBottom: "28px", fontWeight: 300 }}>
+                  All fees include conference materials & meals. Accommodation is extra. A delegation = group of 5.
+                </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-                  {FEES.map(({ label, price, note }) => (
-                    <div key={label} className="fee-card">
+                  {FEES.map(({ label, price, note, highlight }) => (
+                    <div key={label} className={"fee-card" + (highlight ? " highlight" : "")}>
                       <div>
-                        <div style={{ fontWeight: 600, color: "#E8E6E1", marginBottom: "2px", fontSize: "0.88rem" }}>{label}</div>
+                        <div style={{ fontWeight: 600, color: highlight ? "#E8CC7A" : "#E8E6E1", marginBottom: "2px", fontSize: "0.88rem", display: "flex", alignItems: "center", gap: "8px" }}>
+                          {label}
+                          {highlight && <span style={{ background: "rgba(201,168,76,0.2)", color: "#C9A84C", fontSize: "0.58rem", padding: "2px 8px", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 700 }}>Best Value</span>}
+                        </div>
                         <div style={{ fontSize: "0.72rem", color: "#6B7280" }}>{note}</div>
                       </div>
-                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.1rem, 3vw, 1.4rem)", fontWeight: 700, color: "#E8E6E1", flexShrink: 0, marginLeft: "12px" }}>{price}</div>
+                      <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.1rem, 3vw, 1.4rem)", fontWeight: 700, color: highlight ? "#C9A84C" : "#E8E6E1", flexShrink: 0, marginLeft: "12px" }}>{price}</div>
                     </div>
                   ))}
                 </div>
@@ -407,7 +484,11 @@ export default function Home() {
                 <div style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", padding: "24px" }}>
                   <div style={{ fontWeight: 700, color: "#E8E6E1", marginBottom: "16px" }}>Social Events</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                    {[{ icon: "🎭", label: "Cultural Performances", desc: "Dance, drama & music celebrating India's heritage" }, { icon: "✨", label: "Prom Night", desc: "An evening of celebration and elegance" }, { icon: "🎸", label: "Band Night", desc: "Live music to close out the conclave" }].map(({ icon, label, desc }) => (
+                    {[
+                      { icon: "🎭", label: "Cultural Performances", desc: "Dance, drama & music celebrating India's heritage" },
+                      { icon: "✨", label: "Prom Night", desc: "An evening of celebration and elegance" },
+                      { icon: "🎸", label: "Band Night", desc: "Live music to close out the conclave" },
+                    ].map(({ icon, label, desc }) => (
                       <div key={label} style={{ display: "flex", gap: "12px", alignItems: "center" }}>
                         <span style={{ fontSize: "1.1rem", flexShrink: 0 }}>{icon}</span>
                         <div>
@@ -434,7 +515,6 @@ export default function Home() {
           <p style={{ color: "#9CA3AF", maxWidth: "460px", margin: "0 auto 40px", lineHeight: 1.7, fontWeight: 300, fontSize: "clamp(0.9rem, 2vw, 1rem)" }}>
             Join hundreds of delegates from across India for two days of diplomacy, debate, and transformation at Panjab University.
           </p>
-
           <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
             Register via Google Form
           </a>
@@ -462,7 +542,9 @@ export default function Home() {
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
-          {["about", "committees", "fees", "contact"].map(s => <a key={s} href={`#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>)}
+          {["about", "committees", "fees", "contact"].map(s => (
+            <a key={s} href={`#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
+          ))}
         </div>
       </footer>
     </main>
