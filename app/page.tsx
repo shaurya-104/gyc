@@ -209,7 +209,59 @@ export default function Home() {
         </div>
       </header>
 
-      {/* ABOUT */}
+
+      {/* COLLABORATORS */}
+      <section style={{ padding: "32px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", background: "rgba(255,255,255,0.01)" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "24px" }}>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", letterSpacing: "0.2em", color: "#6B7280", textTransform: "uppercase" }}>In Association With</span>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "12px", justifyContent: "center", alignItems: "center" }}>
+            {[
+              { name: "World Economic Forum", short: "WEF" },
+              { name: "Y20 India", short: "Y20" },
+              { name: "Saviṣkār", short: "SVK" },
+              { name: "Commonwealth Youth Council", short: "CYC" },
+              { name: "G20 India", short: "G20" },
+              { name: "Global Shapers Community", short: "GSC" },
+              { name: "AAYA", short: "AAYA" },
+              { name: "Young Sapiens", short: "YS" },
+            ].map(({ name, short }) => (
+              <div key={name} title={name} style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 16px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(255,255,255,0.03)",
+                borderRadius: "4px",
+                transition: "all 0.2s",
+                cursor: "default",
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(201,168,76,0.3)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(201,168,76,0.05)"; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.08)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.03)"; }}
+              >
+                <div style={{
+                  width: "28px", height: "28px",
+                  background: "linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05))",
+                  border: "1px solid rgba(201,168,76,0.25)",
+                  borderRadius: "50%",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontFamily: "'DM Mono', monospace",
+                  fontSize: "0.5rem",
+                  fontWeight: 700,
+                  color: "#C9A84C",
+                  letterSpacing: "0.05em",
+                  flexShrink: 0,
+                }}>{short}</div>
+                <span style={{ fontSize: "clamp(0.7rem, 1.8vw, 0.8rem)", color: "#9CA3AF", fontWeight: 400, whiteSpace: "nowrap" }}>{name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */
       <section id="about" className="section-pad" style={{ padding: "80px clamp(20px, 5vw, 48px)", maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <div className="about-grid" style={{ display: "grid", gap: "48px", alignItems: "start" }}>
@@ -383,8 +435,8 @@ export default function Home() {
             Join hundreds of delegates from across India for two days of diplomacy, debate, and transformation at Panjab University.
           </p>
 
-          <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
-            Register
+          <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
+            Register via Google Form
           </a>
 
           <div className="contact-grid" style={{ display: "grid", gap: "1px", maxWidth: "680px", margin: "56px auto 0", border: "1px solid rgba(255,255,255,0.07)" }}>
