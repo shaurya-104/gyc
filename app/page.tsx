@@ -193,19 +193,7 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          {/* Main Logo with Fallback */}
-          <img 
-            src="/gyc-logo.png.jpeg" 
-            alt="GYC" 
-            style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              e.currentTarget.style.display = "none";
-              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-              if (fallback) fallback.style.display = "flex";
-            }} 
-          />
-          {/* Fallback Text Box (Hidden by default, shown if image breaks) */}
-          <span style={{ display: "none", width: "36px", height: "36px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "6px", fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.05em" }}>
+          <span style={{ display: "flex", width: "36px", height: "36px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "6px", fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.05em" }}>
             GYC
           </span>
 
@@ -565,19 +553,7 @@ export default function Home() {
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           
-          {/* Main Logo with Fallback */}
-          <img 
-            src="/gyc-logo.png.jpeg" 
-            alt="GYC" 
-            style={{ width: "28px", height: "28px", objectFit: "contain" }} 
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              e.currentTarget.style.display = "none";
-              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
-              if (fallback) fallback.style.display = "flex";
-            }} 
-          />
-          {/* Fallback Text Box (Hidden by default, shown if image breaks) */}
-          <span style={{ display: "none", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
+          <span style={{ display: "flex", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
             GYC
           </span>
 
