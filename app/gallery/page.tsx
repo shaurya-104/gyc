@@ -4,32 +4,36 @@
 import React from "react";
 
 const IMAGES = [
-  "first.jpg",
-  "second.jpg",
-  "third.jpg",
-  "fourth.jpg",
-  "fifth.jpg",
-  "sixth.jpg",
-  "seventh.jpg",
-  "eight.jpg",
-  "nine.jpg",
-  "ten.jpg",
-  "eleven.jpg",
-  "twelve.jpg",
-  "thirteen.jpg",
-  "fourteen.jpg",
-  "fifteen.jpg",
-  "sixteen.jpg",
-  "seventeen.jpg",
-  "eighteen.jpg",
+  "first.JPG",
+  "second.JPG",
+  "third.JPG",
+  "fourth.JPG",
+  "fifth.JPG",
+  "sixth.JPG",
+  "seventh.JPG",
+  "eight.JPG",
+  "nine.JPG",
+  "ten.JPG",
+  "eleven.JPG",
+  "twelve.JPG",
+  "thirteen.JPG",
+  "fourteen.JPG",
+  "fifteen.JPG",
+  "sixteen.JPG",
+  "seventeen.JPG",
+  "eighteen.JPG",
 ];
 
 export default function GalleryPage() {
   return (
-    <main style={{ background: "#0a0a0a", minHeight: "100vh", padding: "40px" }}>
+    <main style={{
+      background: "#0a0a0a",
+      minHeight: "100vh",
+      padding: "40px",
+      color: "white"
+    }}>
       
       <h1 style={{
-        color: "white",
         textAlign: "center",
         marginBottom: "40px",
         fontSize: "2.5rem"
@@ -40,7 +44,11 @@ export default function GalleryPage() {
       <div className="gallery">
         {IMAGES.map((img, i) => (
           <div key={i} className="card">
-            <img src={`/gallery/${img}`} alt={`img-${i}`} />
+            <img
+              src={`/gallery/${img}`}
+              alt={`img-${i}`}
+              loading="lazy"
+            />
           </div>
         ))}
       </div>
@@ -56,6 +64,7 @@ export default function GalleryPage() {
           overflow: hidden;
           border-radius: 12px;
           cursor: pointer;
+          background: #111;
         }
 
         .card img {
