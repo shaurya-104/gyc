@@ -6,12 +6,12 @@ import ChromaGrid from "../../component/ChromaGrid";
 
 // --- GYC 1.0 GUESTS DATA FOR CHROMA GRID ---
 const GUEST_ITEMS = [
-  { image: "https://placehold.co/300x250/222/FFF?text=Prof+Rakesh", title: "Prof. Rakesh Sinha", subtitle: "Former MP, Rajya Sabha", handle: "@rakeshsinha", borderColor: "#4A90D9", gradient: "linear-gradient(145deg, rgba(74,144,217,0.2), #000)" },
-  { image: "https://placehold.co/300x250/222/FFF?text=Sharad+Sagar", title: "Sharad Vivek Sagar", subtitle: "CEO & Founder, Dexterity Global", handle: "@sharadsagar", borderColor: "#C9A84C", gradient: "linear-gradient(145deg, rgba(201,168,76,0.2), #000)" },
-  { image: "/speakers/shagun-parihar.jpg", title: "Shagun Parihar", subtitle: "MLA, Jammu & Kashmir", handle: "@shagunparihar", borderColor: "#2EC4B6", gradient: "linear-gradient(145deg, rgba(46,196,182,0.2), #000)" },
-  { image: "/speakers/rashmi-samant.jpg", title: "Rashmi Samant", subtitle: "Former President, Oxford SU", handle: "@rashmisamant", borderColor: "#E63946", gradient: "linear-gradient(145deg, rgba(230,57,70,0.2), #000)" },
-  { image: "/speakers/gaurav-attri.jpg", title: "Gaurav Attri", subtitle: "North Zone Org. Sec., ABVP", handle: "@gauravattri", borderColor: "#FF9F1C", gradient: "linear-gradient(145deg, rgba(255,159,28,0.2), #000)" },
-  { image: "/speakers/aditya-takiar.jpg", title: "Aditya Takiar", subtitle: "National Secretary, ABVP", handle: "@adityatakiar", borderColor: "#7B2D8B", gradient: "linear-gradient(145deg, rgba(123,45,139,0.2), #000)" },
+  { image: "/speakers/prof-rakesh.png", title: "Prof. Rakesh Sinha", subtitle: "Former MP, Rajya Sabha", handle: "@rakeshsinha", borderColor: "#4A90D9", gradient: "linear-gradient(145deg, rgba(74,144,217,0.2), #000)" },
+  { image: "/speakers/sharad-sagar.png", title: "Sharad Vivek Sagar", subtitle: "CEO & Founder, Dexterity Global", handle: "@sharadsagar", borderColor: "#C9A84C", gradient: "linear-gradient(145deg, rgba(201,168,76,0.2), #000)" },
+  { image: "/speakers/shagun-parihar.jpg.JPG", title: "Shagun Parihar", subtitle: "MLA, Jammu & Kashmir", handle: "@shagunparihar", borderColor: "#2EC4B6", gradient: "linear-gradient(145deg, rgba(46,196,182,0.2), #000)" },
+  { image: "/speakers/rashmi-samant.jpg.JPG", title: "Rashmi Samant", subtitle: "Former President, Oxford SU", handle: "@rashmisamant", borderColor: "#E63946", gradient: "linear-gradient(145deg, rgba(230,57,70,0.2), #000)" },
+  { image: "/speakers/gaurav-attri.jpg.JPG", title: "Gaurav Attri", subtitle: "North Zone Org. Sec., ABVP", handle: "@gauravattri", borderColor: "#FF9F1C", gradient: "linear-gradient(145deg, rgba(255,159,28,0.2), #000)" },
+  { image: "/speakers/aditya-takiar.jpg.JPG", title: "Aditya Takiar", subtitle: "National Secretary, ABVP", handle: "@adityatakiar", borderColor: "#7B2D8B", gradient: "linear-gradient(145deg, rgba(123,45,139,0.2), #000)" },
 ];
 
 function useInView(threshold = 0.1) {
