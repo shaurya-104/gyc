@@ -3,17 +3,19 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
-const GALLERY_IMAGES = [
-  { id: 1, src: "/gallery/pic1.jpg", alt: "GYC Moment 1" },
-  { id: 2, src: "/gallery/pic2.jpg", alt: "GYC Moment 2" },
-  { id: 3, src: "/gallery/pic3.jpg", alt: "GYC Moment 3" },
-  { id: 4, src: "/gallery/pic4.jpg", alt: "GYC Moment 4" },
-  { id: 5, src: "/gallery/pic5.jpg", alt: "GYC Moment 5" },
-  { id: 6, src: "/gallery/pic6.jpg", alt: "GYC Moment 6" },
-  { id: 7, src: "/gallery/pic7.jpg", alt: "GYC Moment 7" },
-  { id: 8, src: "/gallery/pic8.jpg", alt: "GYC Moment 8" },
-  { id: 9, src: "/gallery/pic9.jpg", alt: "GYC Moment 9" },
-];
+// ==========================================
+// 📸 GALLERY SETTINGS
+// Change this ONE number to the total amount of photos you have!
+// Make sure your files are named: 1.jpg, 2.jpg, 3.jpg, etc.
+// ==========================================
+const TOTAL_PHOTOS = 20; 
+
+// Automatically generates the array for you!
+const GALLERY_IMAGES = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
+  id: i + 1,
+  src: `/gallery/${i + 1}.jpg`,
+  alt: `GYC Moment ${i + 1}`,
+}));
 
 function useInView(threshold = 0.1) {
   const ref = useRef<HTMLDivElement>(null);
@@ -51,7 +53,14 @@ export default function GalleryPage() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { 
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (!window.location.hash) {
+      window.scrollTo(0, 0); 
+    }
+  }, []);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -97,6 +106,7 @@ export default function GalleryPage() {
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 12px;
         }
 
         .gallery-item img {
@@ -162,7 +172,7 @@ export default function GalleryPage() {
             <a key={s} href={`/#${s}`} className="nav-link">{s}</a>
           ))}
           <a href="/gallery" className="nav-link" style={{ color: "#C9A84C" }}>Gallery</a>
-          <a href="/speakers" className="nav-link">Speakers</a>
+          <a href="/speakers" className="nav-link">Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
 
@@ -189,7 +199,7 @@ export default function GalleryPage() {
             <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>{s}</a>
           ))}
           <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#C9A84C" }} onClick={() => setMenuOpen(false)}>Gallery</a>
-          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Speakers</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
       )}
@@ -210,10 +220,10 @@ export default function GalleryPage() {
       </header>
 
       {/* GALLERY GRID */}
-      <section style={{ padding: "40px clamp(20px, 5vw, 48px)", maxWidth: "1200px", margin: "0 auto" }}>
+      <section style={{ padding: "40px clamp(20px, 5vw, 48px)", maxWidth: "1200px", margin: "0 auto", minHeight: "500px" }}>
         <div className="gallery-grid">
           {GALLERY_IMAGES.map((img, index) => (
-            <AnimatedSection key={img.id} delay={`${(index % 3) * 0.15}s`}>
+            <AnimatedSection key={img.id} delay={`${(index % 3) * 0.1}s`}>
               <div className="gallery-item">
                 <img 
                   src={img.src} 
@@ -224,13 +234,14 @@ export default function GalleryPage() {
                     if (fallback) fallback.style.display = "flex";
                   }}
                 />
+                {/* Fallback Icon if the image number hasn't been uploaded yet */}
                 <div style={{ display: "none", flexDirection: "column", alignItems: "center", gap: "10px", color: "rgba(255,255,255,0.2)" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                     <polyline points="21 15 16 10 5 21"></polyline>
                   </svg>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.1em" }}>IMAGE PENDING</span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.1em" }}>IMAGE {img.id} PENDING</span>
                 </div>
               </div>
             </AnimatedSection>
@@ -261,7 +272,7 @@ export default function GalleryPage() {
             <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
           ))}
           <a href="/gallery" className="nav-link" style={{ fontSize: "0.7rem" }}>Gallery</a>
-          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Speakers</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Previous Speakers</a>
         </div>
       </footer>
     </main>
