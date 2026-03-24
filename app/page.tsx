@@ -106,7 +106,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => { 
-    // FIX: Force browser to scroll to the top on page load, stopping mobile bug
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
@@ -145,8 +144,10 @@ export default function Home() {
         .ghost-btn { background: transparent; color: #C9A84C; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 1px solid rgba(201,168,76,0.5); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
         .ghost-btn:hover { border-color: #C9A84C; background: rgba(201,168,76,0.08); }
 
-        .outline-btn { background: transparent; color: #E8E6E1; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
-        .outline-btn:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
+        /* Teaser Card Styles */
+        .teaser-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .teaser-card:hover .arrow { transform: translateX(5px); }
 
         .committee-tab { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 13px 18px; border-left: 2px solid transparent; width: 100%; text-align: left; transition: all 0.2s; color: #6B7280; font-family: 'DM Sans', sans-serif; }
         .committee-tab:hover { color: #E8E6E1; border-left-color: rgba(201,168,76,0.4); background: rgba(255,255,255,0.02); }
@@ -289,11 +290,10 @@ export default function Home() {
             A two-day summit of diplomacy, debate, and discovery — where young minds forge the resolutions of tomorrow.
           </p>
 
+          {/* REVERTED TO 2 BUTTONS */}
           <div className="hero-btns" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
             <a href="#committees" className="gold-btn">Explore Committees</a>
             <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register</a>
-            <a href="/speakers" className="outline-btn">Our Speakers</a>
-            <a href="/gallery" className="outline-btn">View Gallery</a>
           </div>
 
           <div className="countdown-box" style={{ border: "1px solid rgba(201,168,76,0.2)", background: "rgba(201,168,76,0.03)", padding: "24px 32px", display: "inline-block", width: "100%", maxWidth: "420px" }}>
@@ -376,6 +376,39 @@ export default function Home() {
                 </div>
               ))}
             </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* NEW: DISCOVER MORE (SPEAKERS & GALLERY TEASER SECTION) */}
+      <section style={{ padding: "40px clamp(20px, 5vw, 48px) 80px", maxWidth: "1100px", margin: "0 auto" }}>
+        <AnimatedSection>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
+            
+            {/* Speakers Teaser Card */}
+            <a href="/speakers" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.01))", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>🎤</div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#C9A84C", marginBottom: "12px" }}>Our Speakers</h3>
+                <p style={{ color: "#9CA3AF", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: "24px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
+                <div style={{ color: "#E8E6E1", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
+                  View Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Gallery Teaser Card */}
+            <a href="/gallery" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, rgba(74,144,217,0.05), rgba(74,144,217,0.01))", border: "1px solid rgba(74,144,217,0.2)", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>📸</div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#4A90D9", marginBottom: "12px" }}>Event Gallery</h3>
+                <p style={{ color: "#9CA3AF", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: "24px" }}>Explore moments of diplomacy, debate, and unforgettable memories forged at past Global Youth Conclaves.</p>
+                <div style={{ color: "#E8E6E1", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
+                  View Photos <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                </div>
+              </div>
+            </a>
+
           </div>
         </AnimatedSection>
       </section>
