@@ -105,7 +105,15 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => { window.scrollTo(0, 0); }, []);
+  useEffect(() => { 
+    // FIX: Force browser to scroll to the top on page load, stopping mobile bug
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (!window.location.hash) {
+      window.scrollTo(0, 0); 
+    }
+  }, []);
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -136,6 +144,9 @@ export default function Home() {
 
         .ghost-btn { background: transparent; color: #C9A84C; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 1px solid rgba(201,168,76,0.5); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
         .ghost-btn:hover { border-color: #C9A84C; background: rgba(201,168,76,0.08); }
+
+        .outline-btn { background: transparent; color: #E8E6E1; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 1px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; }
+        .outline-btn:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 
         .committee-tab { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 13px 18px; border-left: 2px solid transparent; width: 100%; text-align: left; transition: all 0.2s; color: #6B7280; font-family: 'DM Sans', sans-serif; }
         .committee-tab:hover { color: #E8E6E1; border-left-color: rgba(201,168,76,0.4); background: rgba(255,255,255,0.02); }
@@ -281,6 +292,8 @@ export default function Home() {
           <div className="hero-btns" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
             <a href="#committees" className="gold-btn">Explore Committees</a>
             <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register</a>
+            <a href="/speakers" className="outline-btn">Our Speakers</a>
+            <a href="/gallery" className="outline-btn">View Gallery</a>
           </div>
 
           <div className="countdown-box" style={{ border: "1px solid rgba(201,168,76,0.2)", background: "rgba(201,168,76,0.03)", padding: "24px 32px", display: "inline-block", width: "100%", maxWidth: "420px" }}>
