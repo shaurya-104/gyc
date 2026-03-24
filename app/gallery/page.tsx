@@ -5,15 +5,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 // ==========================================
 // 📸 GALLERY SETTINGS
-// Change this ONE number to the total amount of photos you have!
-// Make sure your files are named: 1.jpg, 2.jpg, 3.jpg, etc.
+// Make sure this matches the number of photos in your folder!
 // ==========================================
-const TOTAL_PHOTOS = 20; 
+const TOTAL_PHOTOS = 18; 
 
-// Automatically generates the array for you!
+// FIX: Updated the src path to match your exact file extension (.jpg.JPG)
 const GALLERY_IMAGES = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
   id: i + 1,
-  src: `/gallery/${i + 1}.jpg`,
+  src: `/gallery/${i + 1}.jpg.JPG`, 
   alt: `GYC Moment ${i + 1}`,
 }));
 
@@ -241,7 +240,7 @@ export default function GalleryPage() {
                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                     <polyline points="21 15 16 10 5 21"></polyline>
                   </svg>
-                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.1em" }}>IMAGE {img.id} PENDING</span>
+                  <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.1em" }}>IMAGE PENDING</span>
                 </div>
               </div>
             </AnimatedSection>
