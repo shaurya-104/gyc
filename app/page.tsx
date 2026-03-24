@@ -194,7 +194,7 @@ export default function Home() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img 
-            src="/gyc-logo.png.jpeg" 
+            src="/gyc-logo.png" 
             alt="GYC" 
             style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -528,10 +528,10 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
+      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto", marginTop: "40px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img 
-            src="/gyc-logo.png.jpeg" 
+            src="/gyc-logo.png" 
             alt="GYC" 
             style={{ width: "28px", height: "28px", objectFit: "contain" }} 
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -543,7 +543,6 @@ export default function Home() {
           <span style={{ display: "none", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
             GYC
           </span>
-
           <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>

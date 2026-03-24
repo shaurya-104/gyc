@@ -2,17 +2,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import ChromaGrid from "../../components/ChromaGrid";
+import ChromaGrid from "../../component/ChromaGrid";
 
 // --- GYC 1.0 GUESTS DATA FOR CHROMA GRID ---
-// When you have photos, place them in public/speakers/ and update 'image'
 const GUEST_ITEMS = [
   { image: "https://placehold.co/300x250/222/FFF?text=Prof+Rakesh", title: "Prof. Rakesh Sinha", subtitle: "Former MP, Rajya Sabha", handle: "@rakeshsinha", borderColor: "#4A90D9", gradient: "linear-gradient(145deg, rgba(74,144,217,0.2), #000)" },
   { image: "https://placehold.co/300x250/222/FFF?text=Sharad+Sagar", title: "Sharad Vivek Sagar", subtitle: "CEO & Founder, Dexterity Global", handle: "@sharadsagar", borderColor: "#C9A84C", gradient: "linear-gradient(145deg, rgba(201,168,76,0.2), #000)" },
-  { image: "https://placehold.co/300x250/222/FFF?text=Shagun+Parihar", title: "Shagun Parihar", subtitle: "MLA, Jammu & Kashmir", handle: "@shagunparihar", borderColor: "#2EC4B6", gradient: "linear-gradient(145deg, rgba(46,196,182,0.2), #000)" },
-  { image: "https://placehold.co/300x250/222/FFF?text=Rashmi+Samant", title: "Rashmi Samant", subtitle: "Former President, Oxford SU", handle: "@rashmisamant", borderColor: "#E63946", gradient: "linear-gradient(145deg, rgba(230,57,70,0.2), #000)" },
-  { image: "https://placehold.co/300x250/222/FFF?text=Gaurav+Attri", title: "Gaurav Attri", subtitle: "North Zone Org. Sec., ABVP", handle: "@gauravattri", borderColor: "#FF9F1C", gradient: "linear-gradient(145deg, rgba(255,159,28,0.2), #000)" },
-  { image: "https://placehold.co/300x250/222/FFF?text=Aditya+Takiar", title: "Aditya Takiar", subtitle: "National Secretary, ABVP", handle: "@adityatakiar", borderColor: "#7B2D8B", gradient: "linear-gradient(145deg, rgba(123,45,139,0.2), #000)" },
+  { image: "/speakers/shagun-parihar.jpg", title: "Shagun Parihar", subtitle: "MLA, Jammu & Kashmir", handle: "@shagunparihar", borderColor: "#2EC4B6", gradient: "linear-gradient(145deg, rgba(46,196,182,0.2), #000)" },
+  { image: "/speakers/rashmi-samant.jpg", title: "Rashmi Samant", subtitle: "Former President, Oxford SU", handle: "@rashmisamant", borderColor: "#E63946", gradient: "linear-gradient(145deg, rgba(230,57,70,0.2), #000)" },
+  { image: "/speakers/gaurav-attri.jpg", title: "Gaurav Attri", subtitle: "North Zone Org. Sec., ABVP", handle: "@gauravattri", borderColor: "#FF9F1C", gradient: "linear-gradient(145deg, rgba(255,159,28,0.2), #000)" },
+  { image: "/speakers/aditya-takiar.jpg", title: "Aditya Takiar", subtitle: "National Secretary, ABVP", handle: "@adityatakiar", borderColor: "#7B2D8B", gradient: "linear-gradient(145deg, rgba(123,45,139,0.2), #000)" },
 ];
 
 function useInView(threshold = 0.1) {
@@ -103,7 +102,7 @@ export default function SpeakersPage() {
       }}>
         <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
           <img 
-            src="/gyc-logo.png.jpeg" 
+            src="/gyc-logo.png" 
             alt="GYC" 
             style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -188,4 +187,31 @@ export default function SpeakersPage() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto", marginTop: "40px"
+      <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto", marginTop: "40px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <img 
+            src="/gyc-logo.png" 
+            alt="GYC" 
+            style={{ width: "28px", height: "28px", objectFit: "contain" }} 
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.style.display = "none";
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = "flex";
+            }} 
+          />
+          <span style={{ display: "none", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
+            GYC
+          </span>
+          <span style={{ color: "#6B7280", fontSize: "0.78rem" }}>Global Youth Conclave 2.0 — 2026</span>
+        </div>
+        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          {["about", "committees", "fees", "contact"].map(s => (
+            <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
+          ))}
+          <a href="/gallery" className="nav-link" style={{ fontSize: "0.7rem" }}>Gallery</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Speakers</a>
+        </div>
+      </footer>
+    </main>
+  );
+}

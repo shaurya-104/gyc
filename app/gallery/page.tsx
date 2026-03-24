@@ -3,8 +3,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
-// --- ADD YOUR IMAGE FILE NAMES HERE LATER ---
-// Put your future images in the public/gallery/ folder
 const GALLERY_IMAGES = [
   { id: 1, src: "/gallery/pic1.jpg", alt: "GYC Moment 1" },
   { id: 2, src: "/gallery/pic2.jpg", alt: "GYC Moment 2" },
@@ -142,7 +140,7 @@ export default function GalleryPage() {
       }}>
         <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px", textDecoration: "none" }}>
           <img 
-            src="/gyc-logo.png.jpeg" 
+            src="/gyc-logo.png" 
             alt="GYC" 
             style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -244,7 +242,7 @@ export default function GalleryPage() {
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto", marginTop: "40px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img 
-            src="/gyc-logo.png.jpeg" 
+            src="/gyc-logo.png" 
             alt="GYC" 
             style={{ width: "28px", height: "28px", objectFit: "contain" }} 
             onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
