@@ -11,6 +11,7 @@ const COMMITTEES = [
   { abbr: "Lok Sabha", name: "Lok Sabha Simulation", description: "Simulates India's parliamentary system, giving participants an immersive experience in debating national issues, drafting resolutions, and understanding the full arc of legislative processes.", agenda: "Review of 12 Years of NDA Government", color: "#7C3AED", icon: "📜" },
   { abbr: "RYS", name: "Rashtriya Yuva Sansad", description: "A simulation of India's youth parliament, RYS empowers young voices to debate pressing national issues, draft policy recommendations, and engage in democratic processes — building the next generation of informed and responsible citizens.", agenda: "The Role of Youth in Viksit Bharat 2047", color: "#16A34A", icon: "🇮🇳" },
   { abbr: "Int'l Press", name: "International Press", description: "The media body of GYC — covering debates, reporting developments, and providing critical analysis. Participants take on roles as reporters, photographers, and editors in a live journalism simulation.", agenda: "Simulating Real-World Journalism Across All Committees", color: "#475569", icon: "📰" },
+  { abbr: "Dhurandhar", name: "Dhurandhar Committee", description: "Coming soon...", agenda: "Coming soon...", color: "#E11D48", icon: "⏳" },
 ];
 
 const FEES = [
@@ -397,7 +398,7 @@ export default function Home() {
         <AnimatedSection style={{ maxWidth: "1100px", margin: "0 auto 40px", padding: "0 clamp(20px, 5vw, 48px)" }}>
           <div className="tag" style={{ background: "#FFFFFF" }}>Committees</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, color: "#0F172A" }}>
-            Seven Arenas of <span style={{ color: "#2563EB", fontStyle: "italic" }}>Debate</span>
+            Eight Arenas of <span style={{ color: "#2563EB", fontStyle: "italic" }}>Debate</span>
           </h2>
         </AnimatedSection>
 
