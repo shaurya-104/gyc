@@ -193,7 +193,17 @@ export default function Home() {
         transition: "all 0.3s ease",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <span style={{ display: "flex", width: "36px", height: "36px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "6px", fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.05em" }}>
+          <img 
+            src="/gyc-logo.png.jpeg" 
+            alt="GYC" 
+            style={{ width: "36px", height: "36px", objectFit: "contain", flexShrink: 0 }} 
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.style.display = "none";
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = "flex";
+            }} 
+          />
+          <span style={{ display: "none", width: "36px", height: "36px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "6px", fontFamily: "'DM Mono', monospace", fontSize: "0.85rem", fontWeight: 700, color: "#C9A84C", letterSpacing: "0.05em" }}>
             GYC
           </span>
 
@@ -203,10 +213,12 @@ export default function Home() {
         </div>
 
         <div className="hide-mobile" style={{ display: "flex", gap: "36px", alignItems: "center" }}>
-          {["about", "committees", "fees", "contact"].map(s => (
-            <a key={s} href={`#${s}`} className="nav-link">{s}</a>
-          ))}
-          <a href="#contact" className="gold-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
+          <a href="/#about" className="nav-link">About</a>
+          <a href="/#committees" className="nav-link">Committees</a>
+          <a href="/#fees" className="nav-link">Fees</a>
+          <a href="/gallery" className="nav-link">Gallery</a>
+          <a href="/speakers" className="nav-link">Speakers</a>
+          <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
 
         <button
@@ -228,10 +240,12 @@ export default function Home() {
 
       {menuOpen && (
         <div className="mobile-menu">
-          {["about", "committees", "fees", "contact"].map(s => (
-            <a key={s} href={`#${s}`} className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>{s}</a>
-          ))}
-          <a href="#contact" className="gold-btn" onClick={() => setMenuOpen(false)}>Register Now</a>
+          <a href="/#about" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>About</a>
+          <a href="/#committees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Committees</a>
+          <a href="/#fees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Fees</a>
+          <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Gallery</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Speakers</a>
+          <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
       )}
 
@@ -266,7 +280,7 @@ export default function Home() {
 
           <div className="hero-btns" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
             <a href="#committees" className="gold-btn">Explore Committees</a>
-            <a href="#contact" className="ghost-btn">Register Now</a>
+            <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register</a>
           </div>
 
           <div className="countdown-box" style={{ border: "1px solid rgba(201,168,76,0.2)", background: "rgba(201,168,76,0.03)", padding: "24px 32px", display: "inline-block", width: "100%", maxWidth: "420px" }}>
@@ -313,45 +327,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SPEAKERS */}
-      <section style={{ padding: "80px clamp(20px, 5vw, 48px)", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <AnimatedSection>
-            <div style={{ textAlign: "center", marginBottom: "48px" }}>
-              <div className="tag" style={{ display: "inline-block" }}>GYC 1.0 Guests</div>
-              <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.8rem, 5vw, 3rem)", fontWeight: 700, color: "#FFFFFF" }}>
-                Voices That <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Inspired</span>
-              </h2>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(clamp(140px, 28vw, 200px), 1fr))", gap: "20px" }}>
-              {[
-                { name: "Prof. Rakesh Sinha", role: "Former MP", org: "Rajya Sabha", initials: "RS", color: "#4A90D9" },
-                { name: "Sharad Vivek Sagar", role: "CEO & Founder", org: "Dexterity Global", initials: "SVS", color: "#C9A84C" },
-                { name: "Shagun Parihar", role: "MLA", org: "Jammu & Kashmir", initials: "SP", color: "#2EC4B6" },
-                { name: "Rashmi Samant", role: "Former President", org: "Oxford University Students Union", initials: "RS", color: "#E63946" },
-                { name: "Gaurav Attri", role: "North Zone Organizing Secretary", org: "ABVP", initials: "GA", color: "#FF9F1C" },
-                { name: "Aditya Takiar", role: "National Secretary", org: "ABVP", initials: "AT", color: "#7B2D8B" },
-              ].map(({ name, role, org, initials, color }) => (
-                <div key={name} style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.07)", padding: "24px 20px", textAlign: "center", transition: "all 0.25s", cursor: "default" }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = `${color}40`; (e.currentTarget as HTMLDivElement).style.background = `${color}08`; (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = "rgba(255,255,255,0.07)"; (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.02)"; (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; }}
-                >
-                  <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: `linear-gradient(135deg, ${color}40, ${color}15)`, border: `2px solid ${color}60`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontFamily: "'Playfair Display', serif", fontSize: "1rem", fontWeight: 700, color: color, letterSpacing: "0.05em" }}>
-                    {initials}
-                  </div>
-                  <div style={{ fontWeight: 600, color: "#E8E6E1", fontSize: "0.88rem", marginBottom: "4px", lineHeight: 1.3 }}>{name}</div>
-                  <div style={{ color: color, fontSize: "0.72rem", fontWeight: 500, marginBottom: "4px", letterSpacing: "0.03em" }}>{role}</div>
-                  <div style={{ color: "#6B7280", fontSize: "0.7rem", fontWeight: 300, lineHeight: 1.4 }}>{org}</div>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* ABOUT */}
-      <section id="about" style={{ padding: "80px clamp(20px, 5vw, 48px)", maxWidth: "1100px", margin: "0 auto" }}>
+      <section id="about" style={{ padding: "80px clamp(20px, 5vw, 48px)", maxWidth: "1100px", margin: "0 auto", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
         <AnimatedSection>
           <div className="about-grid" style={{ display: "grid", gap: "48px", alignItems: "start" }}>
             <div>
@@ -529,8 +506,9 @@ export default function Home() {
           <p style={{ color: "#9CA3AF", maxWidth: "460px", margin: "0 auto 40px", lineHeight: 1.7, fontWeight: 300, fontSize: "clamp(0.9rem, 2vw, 1rem)" }}>
             Join hundreds of delegates from across India for two days of diplomacy, debate, and transformation at Panjab University.
           </p>
-          <a href="https://forms.google.com" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
-            Register via Google Form
+          
+          <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ fontSize: "0.85rem", padding: "16px 40px" }}>
+            Register
           </a>
 
           <div className="contact-grid" style={{ display: "grid", gap: "1px", maxWidth: "680px", margin: "56px auto 0", border: "1px solid rgba(255,255,255,0.07)" }}>
@@ -552,8 +530,17 @@ export default function Home() {
       {/* FOOTER */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.07)", padding: "24px clamp(20px, 5vw, 48px)", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px", maxWidth: "1100px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          
-          <span style={{ display: "flex", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
+          <img 
+            src="/gyc-logo.png.jpeg" 
+            alt="GYC" 
+            style={{ width: "28px", height: "28px", objectFit: "contain" }} 
+            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+              e.currentTarget.style.display = "none";
+              const fallback = e.currentTarget.nextElementSibling as HTMLElement;
+              if (fallback) fallback.style.display = "flex";
+            }} 
+          />
+          <span style={{ display: "none", width: "28px", height: "28px", alignItems: "center", justifyContent: "center", background: "rgba(201,168,76,0.15)", borderRadius: "4px", fontFamily: "'DM Mono', monospace", fontSize: "0.6rem", fontWeight: 700, color: "#C9A84C" }}>
             GYC
           </span>
 
@@ -561,8 +548,10 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
           {["about", "committees", "fees", "contact"].map(s => (
-            <a key={s} href={`#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
+            <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
           ))}
+          <a href="/gallery" className="nav-link" style={{ fontSize: "0.7rem" }}>Gallery</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Speakers</a>
         </div>
       </footer>
     </main>
