@@ -5,14 +5,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 // ==========================================
 // 📸 GALLERY SETTINGS
-// Make sure this matches the number of photos in your folder!
+// Set to 23 based on your screenshot!
 // ==========================================
-const TOTAL_PHOTOS = 18; 
+const TOTAL_PHOTOS = 23; 
 
-// FIX: Updated the src path to match your exact file extension (.jpg.JPG)
+// Automatically generates the array for 1.jpg, 2.jpg, etc.
 const GALLERY_IMAGES = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
   id: i + 1,
-  src: `/gallery/${i + 1}.jpg.JPG`, 
+  src: `/gallery/${i + 1}.jpg`, 
   alt: `GYC Moment ${i + 1}`,
 }));
 
@@ -233,7 +233,6 @@ export default function GalleryPage() {
                     if (fallback) fallback.style.display = "flex";
                   }}
                 />
-                {/* Fallback Icon if the image number hasn't been uploaded yet */}
                 <div style={{ display: "none", flexDirection: "column", alignItems: "center", gap: "10px", color: "rgba(255,255,255,0.2)" }}>
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
