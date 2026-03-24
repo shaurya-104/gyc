@@ -230,6 +230,7 @@ export default function Home() {
           <a href="/#about" className="nav-link">About</a>
           <a href="/#committees" className="nav-link">Committees</a>
           <a href="/#fees" className="nav-link">Fees</a>
+          <a href="/gallery" className="nav-link">Gallery</a>
           <a href="/speakers" className="nav-link">Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
@@ -256,6 +257,7 @@ export default function Home() {
           <a href="/#about" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>About</a>
           <a href="/#committees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Committees</a>
           <a href="/#fees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Fees</a>
+          <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Gallery</a>
           <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
@@ -376,20 +378,36 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* DISCOVER MORE (SPEAKERS TEASER SECTION ONLY) */}
-      <section style={{ padding: "0 clamp(20px, 5vw, 48px) 100px", maxWidth: "700px", margin: "0 auto" }}>
+      {/* DISCOVER MORE (SPEAKERS & GALLERY TEASER SECTION) */}
+      <section style={{ padding: "0 clamp(20px, 5vw, 48px) 100px", maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
-            {/* Speakers Teaser Card - Centered */}
-            <a href="/speakers" style={{ textDecoration: "none", display: "block" }}>
-              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #EFF6FF, #FFFFFF)", border: "1px solid #BFDBFE", borderRadius: "16px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
+            
+            {/* Speakers Teaser Card */}
+            <a href="/speakers" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #EFF6FF, #FFFFFF)", border: "1px solid #BFDBFE", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>🎤</div>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#1E3A8A", marginBottom: "12px" }}>Previous Speakers</h3>
-                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px", maxWidth: "500px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
                 <div style={{ color: "#2563EB", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
                   View Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
                 </div>
               </div>
             </a>
+
+            {/* Gallery Teaser Card */}
+            <a href="/gallery" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #F0FDF4, #FFFFFF)", border: "1px solid #BBF7D0", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>📸</div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#166534", marginBottom: "12px" }}>Event Gallery</h3>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Explore moments of diplomacy, debate, and unforgettable memories forged at past Global Youth Conclaves.</p>
+                <div style={{ color: "#16A34A", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
+                  View Photos <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                </div>
+              </div>
+            </a>
+
+          </div>
         </AnimatedSection>
       </section>
 
@@ -575,6 +593,7 @@ export default function Home() {
           {["about", "committees", "fees", "contact"].map(s => (
             <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.75rem" }}>{s}</a>
           ))}
+          <a href="/gallery" className="nav-link" style={{ fontSize: "0.75rem" }}>Gallery</a>
           <a href="/speakers" className="nav-link" style={{ fontSize: "0.75rem" }}>Previous Speakers</a>
         </div>
       </footer>
