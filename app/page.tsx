@@ -229,7 +229,7 @@ export default function Home() {
           <a href="/#committees" className="nav-link">Committees</a>
           <a href="/#fees" className="nav-link">Fees</a>
           <a href="/gallery" className="nav-link">Gallery</a>
-          <a href="/speakers" className="nav-link">Speakers</a>
+          <a href="/speakers" className="nav-link">Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
 
@@ -256,7 +256,7 @@ export default function Home() {
           <a href="/#committees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Committees</a>
           <a href="/#fees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Fees</a>
           <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Gallery</a>
-          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Speakers</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em" }} onClick={() => setMenuOpen(false)}>Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="gold-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
       )}
@@ -290,7 +290,6 @@ export default function Home() {
             A two-day summit of diplomacy, debate, and discovery — where young minds forge the resolutions of tomorrow.
           </p>
 
-          {/* REVERTED TO 2 BUTTONS */}
           <div className="hero-btns" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
             <a href="#committees" className="gold-btn">Explore Committees</a>
             <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register</a>
@@ -389,7 +388,7 @@ export default function Home() {
             <a href="/speakers" style={{ textDecoration: "none", display: "block", height: "100%" }}>
               <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.01))", border: "1px solid rgba(201,168,76,0.2)", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>🎤</div>
-                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#C9A84C", marginBottom: "12px" }}>Our Speakers</h3>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#C9A84C", marginBottom: "12px" }}>Previous Speakers</h3>
                 <p style={{ color: "#9CA3AF", fontSize: "0.9rem", lineHeight: 1.6, marginBottom: "24px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
                 <div style={{ color: "#E8E6E1", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
                   View Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
@@ -596,7 +595,7 @@ export default function Home() {
             <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.7rem" }}>{s}</a>
           ))}
           <a href="/gallery" className="nav-link" style={{ fontSize: "0.7rem" }}>Gallery</a>
-          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Speakers</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "0.7rem" }}>Previous Speakers</a>
         </div>
       </footer>
     </main>
