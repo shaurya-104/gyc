@@ -5,13 +5,14 @@ import React, { useState, useEffect, useRef } from "react";
 
 // ==========================================
 // 📸 GALLERY SETTINGS
-// Set to 23 based on your screenshot!
+// This will automatically grab images 1.jpg through 23.jpg
 // ==========================================
 const TOTAL_PHOTOS = 23; 
 
-// Automatically generates the array for 1.jpg, 2.jpg, etc.
 const GALLERY_IMAGES = Array.from({ length: TOTAL_PHOTOS }, (_, i) => ({
   id: i + 1,
+  // Make sure your files are just named 1.jpg, 2.jpg, etc.
+  // If they are double extensions like 1.jpg.JPG, change the line below to: `/gallery/${i + 1}.jpg.JPG`
   src: `/gallery/${i + 1}.jpg`, 
   alt: `GYC Moment ${i + 1}`,
 }));
