@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Global Youth Conclave 2.0 | Panjab University",
-  description: "Join the Global Youth Conclave 2.0 on 28 & 29 March 2026 at Panjab University, Chandigarh.",
+  description: "Join the Global Youth Conclave 2.0 on 24 & 25 April 2026 at Panjab University, Chandigarh.",
 };
 
 export default function RootLayout({
