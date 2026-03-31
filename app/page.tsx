@@ -231,6 +231,7 @@ export default function Home() {
           <a href="/#committees" className="nav-link">Committees</a>
           <a href="/#fees" className="nav-link">Fees</a>
           <a href="/gallery" className="nav-link">Gallery</a>
+          <a href="/tech-events" className="nav-link" style={{ color: "#2563EB" }}>Tech Events</a>
           <a href="/speakers" className="nav-link">Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
@@ -258,6 +259,7 @@ export default function Home() {
           <a href="/#committees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Committees</a>
           <a href="/#fees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Fees</a>
           <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Gallery</a>
+          <a href="/tech-events" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#2563EB" }} onClick={() => setMenuOpen(false)}>Tech Events</a>
           <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Previous Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
@@ -378,7 +380,7 @@ export default function Home() {
         </AnimatedSection>
       </section>
 
-      {/* DISCOVER MORE (SPEAKERS & GALLERY TEASER SECTION) */}
+      {/* DISCOVER MORE (TEASER SECTION) */}
       <section style={{ padding: "0 clamp(20px, 5vw, 48px) 100px", maxWidth: "1100px", margin: "0 auto" }}>
         <AnimatedSection>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
@@ -391,6 +393,18 @@ export default function Home() {
                 <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
                 <div style={{ color: "#2563EB", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
                   View Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                </div>
+              </div>
+            </a>
+
+            {/* Tech Events Teaser Card (NEW!) */}
+            <a href="/tech-events" style={{ textDecoration: "none", display: "block", height: "100%" }}>
+              <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #FEF2F2, #FFFFFF)", border: "1px solid #FECACA", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>💻</div>
+                <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#991B1B", marginBottom: "12px" }}>Technical Events</h3>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Push your limits in our 24-hour hackathons and coding sprints. Build, scale, and innovate.</p>
+                <div style={{ color: "#DC2626", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
+                  View Events <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
                 </div>
               </div>
             </a>
@@ -593,6 +607,7 @@ export default function Home() {
           {["about", "committees", "fees", "contact"].map(s => (
             <a key={s} href={`/#${s}`} className="nav-link" style={{ fontSize: "0.75rem" }}>{s}</a>
           ))}
+          <a href="/tech-events" className="nav-link" style={{ fontSize: "0.75rem" }}>Tech Events</a>
           <a href="/gallery" className="nav-link" style={{ fontSize: "0.75rem" }}>Gallery</a>
           <a href="/speakers" className="nav-link" style={{ fontSize: "0.75rem" }}>Previous Speakers</a>
         </div>
