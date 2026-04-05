@@ -7,16 +7,18 @@ const techEvents = [
   {
     id: "astryx-hackathon-01",
     title: "Hackathon",
-    date: "April 24-25 (TBA)",
+    date: "April 24, 2026",
     status: "Coming Soon",
     organizedBy: "Astryx Tech Club",
-    shortDesc: "A high-octane coding sprint. Build, scale, and innovate alongside the brightest minds.",
-    fullDesc: `Join us for the ultimate coding sprint brought to you by Astryx. Whether you are building a full-stack web app, training an ML model, or deploying a cloud-native solution, this is your battleground. 
+    shortDesc: "A high-octane 24-hour coding sprint. Build, scale, and innovate alongside the brightest minds.",
+    fullDesc: `Join us for the ultimate 24-hour coding sprint brought to you by Astryx. Whether you are building a full-stack web app, training an ML model, or deploying a cloud-native solution, this is your battleground. 
     
-    We are bringing together top developers, designers, and creators to solve real-world problems. Expect intense coding, mentorship, and massive networking opportunities.`,
+    We are bringing together top developers, designers, and creators to solve real-world problems. Expect intense coding, mentorship, and massive networking opportunities.
+    
+    Entry Fee: ₹100 per person.`,
     rules: [
-      "Team size: 2-5 members",
-      "All code must be written during the sprint",
+      "Team size: 2-4 members",
+      "All code must be written during the 24-hour sprint",
       "Open to all years and branches",
       "Inter-college teams are highly encouraged",
     ],
