@@ -4,22 +4,22 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const COMMITTEES = [
-  { abbr: "UNGA", name: "United Nations General Assembly", description: "Founded in 1945, UNGA is the central forum for all 193 UN member states to deliberate on peace, security, and human rights. Each nation holds an equal vote, making it the most inclusive body in global governance.", agenda: "Cross Border Terrorism and Strengthening", color: "#2563EB", icon: "🌐" },
-  { abbr: "UNSC", name: "United Nations Security Council", description: "The UNSC ensures global peace and security through 15 member nations—five of which hold permanent veto power. It can impose sanctions, authorize peacekeeping missions, and enforce binding resolutions.", agenda: "Comprehensive Weapon Disarmament and Non-Proliferation", color: "#DC2626", icon: "🛡️" },
-  { abbr: "UNHRC", name: "UN Human Rights Council", description: "An international body of 47 member states committed to promoting and protecting human rights globally. It addresses violations, provides recommendations, and upholds equality, justice, and dignity.", agenda: "Safeguarding Data Privacy and Data Protection as a Fundamental Right", color: "#0D9488", icon: "⚖️" },
-  { abbr: "AIPPM", name: "All India Political Parties Meet", description: "A forum where representatives from across India's political spectrum convene to build consensus on pressing national issues, foster cross-party dialogue, and promote unity on matters of public welfare.", agenda: "Religious Intolerance and Secularism", color: "#D97706", icon: "🏛️" },
-  { abbr: "Lok Sabha", name: "Lok Sabha Simulation", description: "Simulates India's parliamentary system, giving participants an immersive experience in debating national issues, drafting resolutions, and understanding the full arc of legislative processes.", agenda: "Review of 12 Years of NDA Government", color: "#7C3AED", icon: "📜" },
-  { abbr: "RYS", name: "Rashtriya Yuva Sansad", description: "A simulation of India's youth parliament, RYS empowers young voices to debate pressing national issues, draft policy recommendations, and engage in democratic processes — building the next generation of informed and responsible citizens.", agenda: "The Role of Youth in Viksit Bharat 2047", color: "#16A34A", icon: "🇮🇳" },
-  { abbr: "Int'l Press", name: "International Press", description: "The media body of GYC — covering debates, reporting developments, and providing critical analysis. Participants take on roles as reporters, photographers, and editors in a live journalism simulation.", agenda: "Simulating Real-World Journalism Across All Committees", color: "#475569", icon: "📰" },
-  { abbr: "Dhurandhar", name: "Dhurandhar Committee", description: "Coming soon...", agenda: "Coming soon...", color: "#E11D48", icon: "⏳" },
+  { abbr: "UNGA", name: "United Nations General Assembly", description: "The ultimate forum for all 193 UN member states. Step into the shoes of global diplomats to tackle peace, security, and human rights. Every nation gets one vote—make yours count.", agenda: "Cross Border Terrorism and Strengthening", color: "#2563EB", icon: "🌐" },
+  { abbr: "UNSC", name: "United Nations Security Council", description: "The heavyweight room. 15 member nations, 5 permanent vetoes. You'll be dealing with global crises, imposing sanctions, and authorizing peacekeeping missions under extreme pressure.", agenda: "Comprehensive Weapon Disarmament and Non-Proliferation", color: "#DC2626", icon: "🛡️" },
+  { abbr: "UNHRC", name: "UN Human Rights Council", description: "The frontline for global equality and justice. Address severe human rights violations, navigate ethical gray areas, and draft recommendations that protect human dignity worldwide.", agenda: "Safeguarding Data Privacy and Data Protection as a Fundamental Right", color: "#0D9488", icon: "⚖️" },
+  { abbr: "AIPPM", name: "All India Political Parties Meet", description: "Step away from the UN and into Indian politics. Representatives from across the political spectrum clash over pressing national issues. It gets loud, it gets heated, and consensus is everything.", agenda: "Religious Intolerance and Secularism", color: "#D97706", icon: "🏛️" },
+  { abbr: "Lok Sabha", name: "Lok Sabha Simulation", description: "Experience the absolute chaos and brilliance of India's parliamentary system. Draft bills, debate national policies, and master the art of legislative negotiation.", agenda: "Review of 12 Years of NDA Government", color: "#7C3AED", icon: "📜" },
+  { abbr: "RYS", name: "Rashtriya Yuva Sansad", description: "The youth parliament. This is where young voices take the mic to debate national policy and shape the future. Pure grassroots democracy in action.", agenda: "The Role of Youth in Viksit Bharat 2047", color: "#16A34A", icon: "🇮🇳" },
+  { abbr: "Int'l Press", name: "International Press", description: "The journalists who hold the committees accountable. You'll be covering the debates, analyzing the flaws in resolutions, and publishing the breaking news that shapes the narrative.", agenda: "Simulating Real-World Journalism Across All Committees", color: "#475569", icon: "📰" },
+  { abbr: "Dhurandhar", name: "Dhurandhar Committee", description: "A unique, specialized committee. Details are currently highly classified.", agenda: "Revealing soon...", color: "#E11D48", icon: "⏳" },
 ];
 
 const FEES = [
   { label: "Standard Delegate", price: "₹2,499", note: "per delegate" },
   { label: "Early Bird", price: "₹1,999", note: "until 30 March 2026", highlight: true },
   { label: "Delegation (5+)", price: "₹1,799", note: "per delegation" },
-  { label: "International Press", price: "₹1,599", note: "per delegation" },
-  { label: "Rashtriya Yuva Sansad", price: "₹999", note: "per delegation" },
+  { label: "International Press", price: "₹1,599", note: "per journalist" },
+  { label: "Rashtriya Yuva Sansad", price: "₹999", note: "per delegate" },
 ];
 
 const COLLABORATORS = [
@@ -92,7 +92,7 @@ function AnimatedSection({ children, className = "", style = {} }: { children: R
       style={{
         opacity: inView ? 1 : 0,
         transform: inView ? "translateY(0)" : "translateY(30px)",
-        transition: "opacity 0.6s ease, transform 0.6s ease",
+        transition: "opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
         ...style,
       }}
     >
@@ -140,14 +140,18 @@ export default function Home() {
         .nav-link { color: #64748B; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; font-weight: 600; }
         .nav-link:hover { color: #2563EB; }
 
-        .blue-btn { background: linear-gradient(135deg, #1E3A8A, #3B82F6, #1E3A8A); background-size: 200%; color: #FFFFFF; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 36px; border: none; cursor: pointer; transition: background-position 0.4s, transform 0.2s, box-shadow 0.2s; text-decoration: none; display: inline-block; border-radius: 4px; }
-        .blue-btn:hover { background-position: right center; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.3); }
+        .blue-btn { background: linear-gradient(135deg, #1E3A8A, #3B82F6, #1E3A8A); background-size: 200%; color: #FFFFFF; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 14px 36px; border: none; cursor: pointer; transition: background-position 0.4s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s; text-decoration: none; display: inline-block; border-radius: 4px; }
+        .blue-btn:hover { background-position: right center; transform: translateY(-3px) scale(1.02); box-shadow: 0 10px 25px rgba(37,99,235,0.3); }
 
-        .ghost-btn { background: transparent; color: #2563EB; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 2px solid rgba(37,99,235,0.3); cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block; border-radius: 4px; }
-        .ghost-btn:hover { border-color: #2563EB; background: rgba(37,99,235,0.05); }
+        .ghost-btn { background: transparent; color: #2563EB; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 13px 35px; border: 2px solid rgba(37,99,235,0.3); cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-decoration: none; display: inline-block; border-radius: 4px; }
+        .ghost-btn:hover { border-color: #2563EB; background: rgba(37,99,235,0.05); transform: translateY(-3px) scale(1.02); }
 
-        .teaser-card { transition: transform 0.3s ease, box-shadow 0.3s ease; background: #FFFFFF; }
-        .teaser-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
+        /* NEW FORMAL PRIZE BADGE */
+        .prize-badge { display: inline-flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #E2E8F0; padding: 8px 24px; border-radius: 6px; color: #475569; font-weight: 600; font-size: 0.8rem; margin-bottom: 32px; text-decoration: none; box-shadow: 0 2px 6px rgba(0,0,0,0.02); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.2s ease; cursor: pointer; position: relative; z-index: 10; }
+        .prize-badge:hover { border-color: #93C5FD; box-shadow: 0 8px 20px rgba(37,99,235,0.08); color: #2563EB; transform: translateY(-2px); }
+
+        .teaser-card { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease; background: #FFFFFF; }
+        .teaser-card:hover { transform: translateY(-8px) rotate(1deg); box-shadow: 0 25px 50px rgba(0,0,0,0.08); }
         .teaser-card:hover .arrow { transform: translateX(5px); }
 
         .committee-tab { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-left: 3px solid transparent; width: 100%; text-align: left; transition: all 0.2s; color: #64748B; font-family: 'DM Sans', sans-serif; border-radius: 0 8px 8px 0; }
@@ -157,12 +161,12 @@ export default function Home() {
         .committee-chip { background: #FFFFFF; border: 1px solid #E2E8F0; padding: 10px 18px; border-radius: 40px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #64748B; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
         .committee-chip.active { color: #FFFFFF; border-color: #2563EB; background: #2563EB; box-shadow: 0 4px 10px rgba(37,99,235,0.2); }
 
-        .fee-card { background: #FFFFFF; border: 1px solid #E2E8F0; padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; transition: all 0.25s; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-        .fee-card:hover { border-color: #93C5FD; box-shadow: 0 10px 25px rgba(37,99,235,0.08); transform: translateY(-2px); }
+        .fee-card { background: #FFFFFF; border: 1px solid #E2E8F0; padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .fee-card:hover { border-color: #93C5FD; box-shadow: 0 12px 30px rgba(37,99,235,0.08); transform: translateY(-4px) rotate(-0.5deg); }
         .fee-card.highlight { border: 2px solid #3B82F6; background: #F0F9FF; }
 
-        .collab-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border: 1px solid #E2E8F0; background: #FFFFFF; border-radius: 8px; transition: all 0.2s; cursor: default; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-        .collab-badge:hover { border-color: #93C5FD; box-shadow: 0 8px 20px rgba(37,99,235,0.08); transform: translateY(-2px); }
+        .collab-badge { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border: 1px solid #E2E8F0; background: #FFFFFF; border-radius: 8px; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .collab-badge:hover { border-color: #93C5FD; box-shadow: 0 10px 25px rgba(37,99,235,0.08); transform: translateY(-4px) scale(1.05); }
 
         .divider-line { width: 60px; height: 3px; background: linear-gradient(90deg, #2563EB, #93C5FD); margin: 16px 0 24px; border-radius: 2px; }
 
@@ -231,8 +235,8 @@ export default function Home() {
           <a href="/#committees" className="nav-link">Committees</a>
           <a href="/#fees" className="nav-link">Fees</a>
           <a href="/gallery" className="nav-link">Gallery</a>
-          <a href="/tech-events" className="nav-link" style={{ color: "#2563EB" }}>Tech Events</a>
-          <a href="/speakers" className="nav-link">Previous Speakers</a>
+          <a href="/tech-events" className="nav-link">Tech Events</a>
+          <a href="/speakers" className="nav-link">Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" style={{ padding: "10px 24px", fontSize: "0.75rem" }}>Register</a>
         </div>
 
@@ -259,14 +263,14 @@ export default function Home() {
           <a href="/#committees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Committees</a>
           <a href="/#fees" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Fees</a>
           <a href="/gallery" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Gallery</a>
-          <a href="/tech-events" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#2563EB" }} onClick={() => setMenuOpen(false)}>Tech Events</a>
-          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Previous Speakers</a>
+          <a href="/tech-events" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Tech Events</a>
+          <a href="/speakers" className="nav-link" style={{ fontSize: "1.1rem", letterSpacing: "0.2em", color: "#0F172A" }} onClick={() => setMenuOpen(false)}>Speakers</a>
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" onClick={() => setMenuOpen(false)}>Register</a>
         </div>
       )}
 
       {/* HERO */}
-      <header id="top" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "100px clamp(20px, 5vw, 48px) 60px", position: "relative", overflow: "hidden", background: "linear-gradient(to bottom, #F8FAFC, #FFFFFF)" }}>
+      <header id="top" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "120px clamp(20px, 5vw, 48px) 60px", position: "relative", overflow: "hidden", background: "linear-gradient(to bottom, #F8FAFC, #FFFFFF)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(37,99,235,0.05) 0%, transparent 70%)" }} />
         <div className="hero-grid" />
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 50% 40% at 50% 100%, rgba(14,165,233,0.05) 0%, transparent 60%)" }} />
@@ -280,8 +284,15 @@ export default function Home() {
           }} />
         ))}
 
-        <div style={{ position: "relative", zIndex: 2, maxWidth: "900px", width: "100%" }}>
-          <div className="tag" style={{ background: "#FFFFFF", boxShadow: "0 2px 10px rgba(0,0,0,0.02)" }}>24 April 2026 · Panjab University, Chandigarh</div>
+        <div style={{ position: "relative", zIndex: 2, maxWidth: "900px", width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
+          
+          {/* 🔥 FORMAL, STRAIGHT PRIZE HOOK LINK 🔥 */}
+          <a href="#fees" className="prize-badge">
+            <span style={{ fontSize: "1.1rem" }}>🏆</span> 
+            ₹5 Lakhs Prize Pool
+          </a>
+
+          <div className="tag" style={{ background: "#FFFFFF", boxShadow: "0 2px 10px rgba(0,0,0,0.02)" }}>April 24-25, 2026 · Panjab University</div>
 
           <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 9vw, 6.5rem)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "clamp(-1px, -0.02em, -2px)", marginBottom: "24px", color: "#0F172A" }}>
             Global Youth<br />
@@ -290,17 +301,17 @@ export default function Home() {
             </span>
           </h1>
 
-          <p style={{ color: "#475569", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", lineHeight: 1.7, maxWidth: "540px", margin: "0 auto 40px", fontWeight: 400 }}>
-            A two-day summit of diplomacy, debate, and discovery — where young minds forge the resolutions of tomorrow.
+          <p style={{ color: "#475569", fontSize: "clamp(1rem, 2.5vw, 1.2rem)", lineHeight: 1.7, maxWidth: "580px", margin: "0 auto 40px", fontWeight: 400 }}>
+            Two days of intense debate, high-stakes diplomacy, and building connections that outlast the conference.
           </p>
 
           <div className="hero-btns" style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap", marginBottom: "48px" }}>
             <a href="#committees" className="blue-btn">Explore Committees</a>
-            <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register</a>
+            <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="ghost-btn">Register Now</a>
           </div>
 
           <div className="countdown-box" style={{ border: "1px solid #E2E8F0", background: "#FFFFFF", boxShadow: "0 10px 30px rgba(0,0,0,0.03)", padding: "28px 36px", display: "inline-block", width: "100%", maxWidth: "420px", borderRadius: "16px" }}>
-            <div style={{ fontSize: "0.65rem", letterSpacing: "0.2em", color: "#64748B", textTransform: "uppercase", marginBottom: "16px", fontWeight: 700 }}>Conference Begins In</div>
+            <div style={{ fontSize: "0.65rem", letterSpacing: "0.2em", color: "#64748B", textTransform: "uppercase", marginBottom: "16px", fontWeight: 700 }}>Taking the floor in</div>
             <CountdownTimer />
           </div>
         </div>
@@ -345,25 +356,24 @@ export default function Home() {
         <AnimatedSection>
           <div className="about-grid" style={{ display: "grid", gap: "56px", alignItems: "start" }}>
             <div>
-              <div className="tag">About GYC</div>
+              <div className="tag">The Vibe</div>
               <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, lineHeight: 1.15, color: "#0F172A", marginBottom: "20px" }}>
-                Where Youth Shape the<br /><span style={{ color: "#2563EB", fontStyle: "italic" }}>World&apos;s Agenda</span>
+                Step into the Room Where it <span style={{ color: "#2563EB", fontStyle: "italic" }}>Happens</span>
               </h2>
               <div className="divider-line" />
               <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: "16px", fontWeight: 400, fontSize: "clamp(1rem, 2vw, 1.05rem)" }}>
-                Model United Nations is more than an academic exercise — it is a journey that shapes young minds into global citizens, articulate speakers, and empathetic leaders.
+                This isn't just another academic exercise. GYC 2.0 is a proving ground. Step into the shoes of global leaders, navigate geopolitical crises, and negotiate resolutions that actually make sense.
               </p>
               <p style={{ color: "#475569", lineHeight: 1.8, fontWeight: 400, fontSize: "clamp(1rem, 2vw, 1.05rem)" }}>
-                Through GYC 2.0, participants step into the shoes of diplomats and world leaders, navigating complex issues and working toward peaceful solutions across seven dynamic committees.
+                Whether you're drafting a ceasefire in the UNSC or fighting over national policy in the Lok Sabha, you'll leave with sharper arguments, a massive network, and actual real-world skills.
               </p>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               {[
-                { icon: "🎯", title: "Vision", desc: "Empowering young minds through discourse on national and international issues, nurturing tomorrow's leaders." },
-                { icon: "🚀", title: "Mission", desc: "Build leadership, diplomacy, and communication skills through parliamentary and UN-style simulations." },
-                { icon: "🏛️", title: "Venue", desc: "Panjab University, established 1882 — one of India's most distinguished institutions on a 550-acre campus." },
-                { icon: "🏆", title: "Prize Pool", desc: "₹5 Lakhs in awards and cash prizes recognizing exceptional debate, resolution, and diplomatic performance." },
+                { icon: "🎯", title: "The Mission", desc: "No more passive debates. We're here to build confident communicators, sharp negotiators, and leaders who can actually command a room." },
+                { icon: "🏛️", title: "The Venue", desc: "Panjab University. One of the most historic and prestigious campuses in the country. The perfect backdrop for diplomacy." },
+                { icon: "🏆", title: "The Stakes", desc: "₹5 Lakhs in awards and cash prizes. Because exceptional debate and preparation should actually be rewarded." },
               ].map(({ icon, title, desc }) => (
                 <div key={title} style={{ padding: "24px", background: "#FFFFFF", border: "1px solid #E2E8F0", borderLeft: "4px solid #2563EB", borderRadius: "8px", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.02)", cursor: "default" }}>
                   <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
@@ -390,21 +400,21 @@ export default function Home() {
               <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #EFF6FF, #FFFFFF)", border: "1px solid #BFDBFE", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>🎤</div>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#1E3A8A", marginBottom: "12px" }}>Previous Speakers</h3>
-                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Discover the esteemed leaders, policymakers, and change-makers who shaped our previous conclave.</p>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Learn from diplomats, founders, and policymakers who have actually been in the room where it happens.</p>
                 <div style={{ color: "#2563EB", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
-                  View Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                  Check the Lineup <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
                 </div>
               </div>
             </a>
 
-            {/* Tech Events Teaser Card (NEW!) */}
+            {/* Tech Events Teaser Card */}
             <a href="/tech-events" style={{ textDecoration: "none", display: "block", height: "100%" }}>
               <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #FEF2F2, #FFFFFF)", border: "1px solid #FECACA", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>💻</div>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#991B1B", marginBottom: "12px" }}>Technical Events</h3>
-                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Push your limits in our 24-hour hackathons and coding sprints. Build, scale, and innovate.</p>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Stop watching tutorials. Join the Astryx 24-hour hackathon, survive on caffeine, and build something real.</p>
                 <div style={{ color: "#DC2626", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
-                  View Events <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
+                  View the Hackathon <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
                 </div>
               </div>
             </a>
@@ -414,7 +424,7 @@ export default function Home() {
               <div className="teaser-card" style={{ padding: "40px", background: "linear-gradient(135deg, #F0FDF4, #FFFFFF)", border: "1px solid #BBF7D0", borderRadius: "16px", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                 <div style={{ fontSize: "2.5rem", marginBottom: "20px" }}>📸</div>
                 <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.8rem", fontWeight: 700, color: "#166534", marginBottom: "12px" }}>Event Gallery</h3>
-                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Explore moments of diplomacy, debate, and unforgettable memories forged at past Global Youth Conclaves.</p>
+                <p style={{ color: "#475569", fontSize: "0.95rem", lineHeight: 1.6, marginBottom: "24px" }}>Take a look at the chaos, the debates, and the unforgettable memories from past Conclaves.</p>
                 <div style={{ color: "#16A34A", fontSize: "0.85rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", display: "flex", alignItems: "center", gap: "8px" }}>
                   View Photos <span style={{ transition: "transform 0.3s" }} className="arrow">→</span>
                 </div>
@@ -428,7 +438,7 @@ export default function Home() {
       {/* COMMITTEES */}
       <section id="committees" style={{ padding: "100px 0", background: "#F8FAFC", borderTop: "1px solid #E2E8F0", borderBottom: "1px solid #E2E8F0" }}>
         <AnimatedSection style={{ maxWidth: "1100px", margin: "0 auto 40px", padding: "0 clamp(20px, 5vw, 48px)" }}>
-          <div className="tag" style={{ background: "#FFFFFF" }}>Committees</div>
+          <div className="tag" style={{ background: "#FFFFFF" }}>The Lineup</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 700, color: "#0F172A" }}>
             Eight Arenas of <span style={{ color: "#2563EB", fontStyle: "italic" }}>Debate</span>
           </h2>
@@ -498,7 +508,7 @@ export default function Home() {
                 </h2>
                 <div className="divider-line" />
                 <p style={{ color: "#64748B", fontSize: "0.9rem", marginBottom: "32px", fontWeight: 400, lineHeight: 1.6 }}>
-                  All fees include conference materials & meals. Accommodation is extra. A delegation = group of 5.
+                  All fees include conference materials & meals. Accommodation is extra. A delegation is a group of 5.
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   {FEES.map(({ label, price, note, highlight }) => (
@@ -517,26 +527,50 @@ export default function Home() {
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-                <div style={{ background: "linear-gradient(135deg, #EFF6FF, #FFFFFF)", border: "1px solid #BFDBFE", padding: "36px", position: "relative", overflow: "hidden", borderRadius: "16px", boxShadow: "0 10px 30px rgba(37,99,235,0.05)" }}>
+                {/* AWARDS & CASH PRIZES WITH BROKEN SYMMETRY (Tilted 1 degree) */}
+                <div style={{ transform: "rotate(1deg)", background: "linear-gradient(135deg, #EFF6FF, #FFFFFF)", border: "1px solid #BFDBFE", padding: "36px", position: "relative", overflow: "hidden", borderRadius: "16px", boxShadow: "0 10px 30px rgba(37,99,235,0.05)" }}>
                   <div style={{ position: "absolute", top: "-10px", right: "-10px", fontSize: "6rem", opacity: 0.08, lineHeight: 1 }}>🏆</div>
                   <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2rem, 5vw, 3rem)", fontWeight: 900, color: "#1D4ED8", lineHeight: 1, marginBottom: "10px" }}>₹5 Lakhs</div>
                   <div style={{ color: "#0F172A", fontWeight: 700, marginBottom: "12px", fontSize: "1.1rem" }}>in Awards & Cash Prizes</div>
-                  <div style={{ color: "#475569", fontSize: "0.9rem", fontWeight: 400, lineHeight: 1.6 }}>Recognizing exceptional performances in debate, resolution drafting, and diplomatic excellence.</div>
+                  <div style={{ color: "#475569", fontSize: "0.9rem", fontWeight: 400, lineHeight: 1.6 }}>We believe in rewarding those who actually put in the work. Here is how the prize pool breaks down per committee.</div>
+                  
+                  {/* DETAILED PRIZE BREAKDOWN */}
+                  <div style={{ marginTop: "24px", paddingTop: "24px", borderTop: "1px dashed #BFDBFE" }}>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", letterSpacing: "0.15em", color: "#1D4ED8", textTransform: "uppercase", marginBottom: "16px", fontWeight: 700 }}>Committee Prizes</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "12px" }}>
+                      <div style={{ background: "#FFFFFF", padding: "12px", borderRadius: "8px", border: "1px solid #E2E8F0" }}>
+                        <div style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>Best Delegate</div>
+                        <div style={{ color: "#0F172A", fontWeight: 800, fontSize: "1.1rem" }}>₹10,000</div>
+                      </div>
+                      <div style={{ background: "#FFFFFF", padding: "12px", borderRadius: "8px", border: "1px solid #E2E8F0" }}>
+                        <div style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>High Commendation</div>
+                        <div style={{ color: "#0F172A", fontWeight: 800, fontSize: "1.1rem" }}>₹6,000</div>
+                      </div>
+                      <div style={{ background: "#FFFFFF", padding: "12px", borderRadius: "8px", border: "1px solid #E2E8F0" }}>
+                        <div style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>Special Mention</div>
+                        <div style={{ color: "#0F172A", fontWeight: 800, fontSize: "1.1rem" }}>Medals</div>
+                      </div>
+                      <div style={{ background: "#FFFFFF", padding: "12px", borderRadius: "8px", border: "1px solid #E2E8F0" }}>
+                        <div style={{ fontSize: "0.75rem", color: "#64748B", fontWeight: 600, textTransform: "uppercase", marginBottom: "4px" }}>Int&apos;l Press</div>
+                        <div style={{ color: "#0F172A", fontWeight: 800, fontSize: "1.1rem" }}>₹4,000</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", padding: "32px", borderRadius: "16px", boxShadow: "0 4px 10px rgba(0,0,0,0.02)" }}>
                   <div style={{ fontWeight: 800, color: "#0F172A", marginBottom: "12px", fontSize: "1.1rem" }}>🎓 Campus Ambassador</div>
-                  <div style={{ color: "#475569", fontSize: "0.9rem", lineHeight: 1.7, fontWeight: 400, marginBottom: "16px" }}>Bring 7+ delegates and earn free participation, all meals, a certificate, trophy, and cash prize.</div>
+                  <div style={{ color: "#475569", fontSize: "0.9rem", lineHeight: 1.7, fontWeight: 400, marginBottom: "16px" }}>Bring your crew. Get 7+ delegates to register and your entry, food, and accommodation are on us—plus a trophy to take home.</div>
                   <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "0.7rem", color: "#2563EB", letterSpacing: "0.1em", fontWeight: 600 }}>→ Eligibility: 7+ delegates (excluding self)</div>
                 </div>
 
                 <div style={{ background: "#FFFFFF", border: "1px solid #E2E8F0", padding: "32px", borderRadius: "16px", boxShadow: "0 4px 10px rgba(0,0,0,0.02)" }}>
-                  <div style={{ fontWeight: 800, color: "#0F172A", marginBottom: "20px", fontSize: "1.1rem" }}>Social Events</div>
+                  <div style={{ fontWeight: 800, color: "#0F172A", marginBottom: "20px", fontSize: "1.1rem" }}>After Hours</div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                     {[
-                      { icon: "🎭", label: "Cultural Performances", desc: "Dance, drama & music celebrating India's heritage" },
-                      { icon: "✨", label: "Prom Night", desc: "An evening of celebration and elegance" },
-                      { icon: "🎸", label: "Band Night", desc: "Live music to close out the conclave" },
+                      { icon: "🎭", label: "Cultural Night", desc: "Celebrate India's heritage with live dance and drama." },
+                      { icon: "✨", label: "Prom Night", desc: "Because you can't wear a suit for two days straight without an excuse to party." },
+                      { icon: "🎸", label: "Live Band", desc: "The perfect way to close out the conclave." },
                     ].map(({ icon, label, desc }) => (
                       <div key={label} style={{ display: "flex", gap: "16px", alignItems: "center" }}>
                         <span style={{ fontSize: "1.4rem", flexShrink: 0 }}>{icon}</span>
@@ -559,10 +593,10 @@ export default function Home() {
         <AnimatedSection>
           <div className="tag" style={{ background: "#FFFFFF" }}>Join GYC 2.0</div>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(2.5rem, 7vw, 4.5rem)", fontWeight: 900, color: "#0F172A", marginBottom: "20px", lineHeight: 1.1 }}>
-            Ready to Make<br /><span style={{ color: "#2563EB", fontStyle: "italic" }}>History?</span>
+            Ready to Take the<br /><span style={{ color: "#2563EB", fontStyle: "italic" }}>Floor?</span>
           </h2>
           <p style={{ color: "#475569", maxWidth: "500px", margin: "0 auto 48px", lineHeight: 1.8, fontWeight: 400, fontSize: "clamp(1rem, 2vw, 1.1rem)" }}>
-            Join hundreds of delegates from across India for two days of diplomacy, debate, and transformation at Panjab University.
+            Don't just watch from the sidelines. Secure your spot, pick your committee, and get ready to debate with the best.
           </p>
           
           <a href="https://linktr.ee/GlobalYouthConclave" target="_blank" rel="noopener noreferrer" className="blue-btn" style={{ fontSize: "0.9rem", padding: "18px 48px" }}>
